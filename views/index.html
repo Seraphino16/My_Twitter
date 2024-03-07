@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=*, initial-scale=1.0">
+    <title>Tweet Académie</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="d-flex flex-column vh-100">
+
+    <main class="flex-grow-1">
+        <div class="container-fluid h-100">
+            <div class="row h-100">
+                <div class="col-md-6 bg-primary text-white d-flex align-items-center justify-content-center">
+                    <img src="../publics/images/logo-twitter.png" alt="Logo Tweet Académie" class="img-fluid" width="800">
+                </div>
+                <div class="col-md-6 bg-light d-flex align-items-center justify-content-center">
+                    <div class="text-center">
+                        <div class="mb-5">
+                            <h1 class="font-weight-bold pb-4 display-4">Bienvenue sur Tweet Académie</h1>
+                        </div>
+                        <div class="mt-5">
+                            <div class="mt-5">
+                                <h2 class="display-6">Inscrivez-vous</h2>
+                                <button class="btn btn-primary" id="modalRegister">Créer un compte</button>
+                            </div>
+                            <div class="mt-5">
+                                <h2 class="display-5">Vous avez déjà un compte ?</h2>
+                                <button class="btn btn-secondary" id="modalLogin">Se connecter</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="inscriptionModal" tabindex="-1" role="dialog" aria-labelledby="inscriptionModalTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <div id="inscriptionModalContent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="connexionModal" tabindex="-1" role="dialog" aria-labelledby="connexionModalTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <div id="connexionModalContent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+  
+    <footer class="bg-white text-secondary py-4 border-top">
+        <div class="container text-center">
+            <p>&copy; 2024 Tweet Académie</p>
+        </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../publics/scripts/modal.js"></script>
+</body>
+</html>
