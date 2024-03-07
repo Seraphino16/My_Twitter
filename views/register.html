@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col">
+                <form action="" method="post" name="register_form" id="registerForm" class="bg-white rounded px-md-5 pt-5 pb-8 shadow">
+                    <div class="text-center mb-4">
+                        <h2 class="h3 mb-3 font-weight-bold">Inscription</h2>
+                        <input type="hidden" name="form_type" value="register">
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname">Nom :</label>
+                        <input class="form-control border-0 shadow" type="text" name="firstname" id="firstname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Prénom :</label>
+                        <input class="form-control border-0 shadow" type="text" name="lastname" id="lastname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="birthdate">Date de naissance :</label>
+                        <input class="form-control border-0 shadow" type="date" name="birthdate" id="birthdate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="genre">Genre :</label>
+                        <select class="form-control border-0 shadow" name="genre" id="genre" required>
+                            <option value="">Genre</option>
+                            <option value="man">Homme</option>
+                            <option value="woman">Femme</option>
+                            <option value="other">Autre</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email :</label>
+                        <input class="form-control border-0 shadow" type="email" name="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pseudo">Choisissez un pseudo :</label>
+                        <input class="form-control border-0 shadow" type="text" name="pseudo" id="pseudo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe :</label>
+                        <input class="form-control border-0 shadow" type="password" name="password" id="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmez votre mot de passe :</label>
+                        <input class="form-control border-0 shadow" type="password" name="confirm_password" id="confirmPassword" required>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary btn-lg mt-3" id="register">S'inscrire</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../publics/scripts/register.js"></script>
+</body>
+</html>
