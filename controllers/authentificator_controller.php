@@ -80,10 +80,20 @@ class Authentificator implements AuthentificatorInterface {
                                                             $genre, $email, $user_name,
                                                             $hashed_password);
                 if ($register) {
+
+                    $user = $this->authModel->loginUser($email);
+
+                    if ($user) {
+
+                        session_start();
+    
+                        $_SESSION['user_id'] = $user['id'];
+                    }
     
                     $response = [
                         'status' => 'success',
-                        'message' => 'Inscription réussie !'
+                        'message' => 'Inscription réussie !',
+                        'user' => $user 
                     ];
 
                     echo json_encode($response);
