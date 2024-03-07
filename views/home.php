@@ -8,7 +8,7 @@ include '../controller/UserController.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | Tweet Academie</title>
     <link rel="shortcut icon" type="image/png" href="../public/img/logo_onglet.png">
-    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../publics/css/style.css">
     <link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -20,7 +20,7 @@ include '../controller/UserController.php';
                 <div class="sidebar-left">
                     <div class="grid-sidebar">
                         <div class="icon-sidebar-align">
-                            <img src="../public/img/logo_onglet.png" alt="logo" height="50px" width="50px" />
+                            <img src="../publics/img/logo_onglet.png" alt="logo" height="50px" width="50px" />
                         </div>
                     </div>
 
@@ -80,7 +80,7 @@ include '../controller/UserController.php';
 
                     <div class="box-user">
                         <div class="grid-user">
-                            <div><img src="../public/img/profile.png" alt="user" class="img-user"/></div>
+                            <div><img src="../publics/img/profile.png" alt="user" class="img-user"/></div>
                             <div id="userData">
                                 <p class="name" id="fullname"><strong>Fullname</strong></p>
                                 <p class="username" id="username">@Pseudo</p>
@@ -114,7 +114,7 @@ include '../controller/UserController.php';
                                         <div class="text">
                                             <form class="" action="" method="post" enctype="multipart/form-data">
                                                 <div class="inner">
-                                                    <img src="../public/img/profile.png" alt="profile photo">
+                                                    <img src="../publics/img/profile.png" alt="profile photo">
                                                     <label>
                                                         <textarea class="text-whathappen" name="status" rows="8" cols="80" placeholder="Quoi de neuf ?"></textarea>
                                                     </label>
@@ -172,8 +172,8 @@ include '../controller/UserController.php';
 
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="../public/js/colorMode.js"></script>
-    <script src="../public/js/users.js"></script>
+    <script src="../publics/scripts/colorMode.js"></script>
+    <script src="../publics/scripts/tweet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>

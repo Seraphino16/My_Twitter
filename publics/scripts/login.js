@@ -18,7 +18,7 @@ function loginUser() {
 
                 if (response.status === 'success') {
 
-                    window.location.href = '/Webac/W-WEB-090-LIL-1-1-academie-zoe.pilia/views/home.html';
+                    window.location.href = '/Webac/W-WEB-090-LIL-1-1-academie-zoe.pilia/views/home.php';
                 } else {
                     alert('Erreur lors de l\'inscription : ' + response.message);
                 }
