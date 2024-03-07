@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col">
+                <form action="" method="post" name="login_form" id="loginForm" class="bg-white rounded px-md-5 pt-5 pb-4 shadow">
+                    <div class="text-center mb-4">
+                        <h2 class="h3 mb-3 font-weight-bold">Connexion</h2>
+                        <input type="hidden" name="form_type" value="login">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email :</label>
+                        <input class="form-control border-0 shadow" type="email" name="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe :</label>
+                        <input class="form-control border-0 shadow" type="password" name="password" id="password" required>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary btn-lg mx-auto mt-3" id="register">Se connecter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../publics/scripts/login.js"></script>
+</body>
+</html>
