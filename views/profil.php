@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile | Tweet Academie</title>
-    <link rel="shortcut icon" type="image/png" href="../public/img/logo_onglet.png">
+    <link rel="shortcut icon" type="image/png" href="../publics/img/logo_onglet.png">
     <link rel="stylesheet" href="../publics/css/style.css">
     <link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -17,7 +17,7 @@
                 <div class="sidebar-left">
                     <div class="grid-sidebar">
                         <div class="icon-sidebar-align">
-                            <img src="../public/img/logo.png" alt="logo" height="50px" width="50px" />
+                            <img src="../publics/img/logo.png" alt="logo" height="50px" width="50px" />
                         </div>
                     </div>
 
@@ -27,7 +27,7 @@
                                 <i class="bi bi-house-fill"></i>
                             </div>
                             <div class="wrapper-left-elements mt-1">
-                                <a href=""><strong>Accueil</strong></a>
+                                <a href="/Webac/W-WEB-090-LIL-1-1-academie-zoe.pilia/views/home.php"><strong>Accueil</strong></a>
                             </div>
                         </div>
                     </a>
@@ -77,10 +77,10 @@
 
                     <div class="box-user">
                         <div class="grid-user">
-                            <div><img src="../public/img/profile.png" alt="user" class="img-user"/></div>
+                            <div><img src="../publics/img/profile.png" alt="user" class="img-user"/></div>
                             <div>
-                                <p class="name fullname"><strong>Name</strong></p>
-                                <p class="username pseudo">@Pseudo</p>
+                                <p class="name fullname" id="fullname"><strong>Name</strong></p>
+                                <p class="username pseudo" id="username">@Pseudo</p>
                             </div>
                             <div class="mt-arrow">
                                 <!--
@@ -126,11 +126,11 @@
                             </div>
                             <div class="row mt-5">
                                 <div class="col-md-12">
-                                    <img class="w-100 home-img-cover" src="../public/img/cover.png" alt="">
+                                    <img class="w-100 home-img-cover" src="../publics/img/cover.png" alt="">
                                 </div>
                             </div>
                             <div class="row justify-content-between">
-                                <img class="home-img-user" src="../public/img/profil.png" alt="">
+                                <img class="home-img-user" src="../publics/img/profile.png" alt="">
                                 <button class="edit-btn" data-follow="">Edit Profile</button>
                             </div>
                             <div class="home-title">
@@ -205,7 +205,7 @@
 
         <script src="../publics/scripts/colorMode.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script src="../public/js/profile.js"></script>
+        <script src="../publics/scripts/profil.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
