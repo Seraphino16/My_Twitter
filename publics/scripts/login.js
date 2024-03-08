@@ -21,7 +21,9 @@ function loginUser() {
                     const user = response.message; 
                     const fullname = user.firstname + ' ' + user.lastname; 
                     const username = user.username;
+                    const id = user.id;
                     
+                    sessionStorage.setItem('id', id);
                     sessionStorage.setItem('fullname', fullname);
                     sessionStorage.setItem('username', username);
     

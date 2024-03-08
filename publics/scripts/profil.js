@@ -2,14 +2,58 @@ $(document).ready(function() {
 
     const fullname = sessionStorage.getItem('fullname');
     const username = sessionStorage.getItem('username');
+    const id = sessionStorage.getItem('id');
     
     if (fullname && username) {
      
-        $('.name').html('<strong>' + fullname + '</strong>');
+        $('.fullname').html('<strong>' + fullname + '</strong>');
         $('.username').text('@' + username);
+
+        $('.fullname').text(fullname);
+        $('.pseudo').text('@' + username);
+
+    
+        getUserInfos(id);
     }
 });
 
+
+function getUserInfos(id) {
+
+    const formData = {
+        id: id,
+        action: "fetchCurrentUser"
+    };
+
+    $.ajax({
+        type: 'POST',
+        url: '/Webac/W-WEB-090-LIL-1-1-academie-zoe.pilia/controllers/user_controller.php',
+        data: formData,
+        dataType: 'json',
+        success: function(response) {
+            
+            if (response.status === 'success') {
+
+                alert(JSON.stringify(response));
+
+                const Info = response.data;
+
+                $('.bio').text(Info.bio);
+                $('.location').text(Info.location);
+                
+            } else {
+                console.error('Erreur lors de la récupération des informations supplémentaires.');
+            }
+        },
+        error: function(xhr, status, error) {
+                console.log('Erreur AJAX : ');
+                console.log('status: ' + status);
+                console.log('error: ' + error);
+                console.log('responseText: ' + xhr.responseText);
+                alert('Erreur AJAX : ' + status);
+        }
+    });
+}
 
 /*$(document).ready(function () {
     console.log("Hello");
