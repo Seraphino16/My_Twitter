@@ -88,6 +88,11 @@ class Authentificator implements AuthentificatorInterface {
                         session_start();
     
                         $_SESSION['user_id'] = $user['id'];
+
+                        $cookie_name = "user_id";
+                        $cookie_value = $user['id'];
+                        $cookie_expiration = time() + (86400 * 30);
+                        setcookie($cookie_name, $cookie_value, $cookie_expiration, "/");
                     }
     
                     $response = [
@@ -134,6 +139,11 @@ class Authentificator implements AuthentificatorInterface {
                     session_start();
     
                     $_SESSION['user_id'] = $user['id'];
+
+                    $cookie_name = "user_id";
+                    $cookie_value = $user['id'];
+                    $cookie_expiration = time() + (86400 * 30);
+                    setcookie($cookie_name, $cookie_value, $cookie_expiration, "/");
     
                     $response = [
                         'status' => 'success',
