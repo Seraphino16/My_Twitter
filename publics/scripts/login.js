@@ -18,7 +18,15 @@ function loginUser() {
 
                 if (response.status === 'success') {
 
+                    const user = response.message; 
+                    const fullname = user.firstname + ' ' + user.lastname; 
+                    const username = user.username;
+                    
+                    sessionStorage.setItem('fullname', fullname);
+                    sessionStorage.setItem('username', username);
+    
                     window.location.href = '/Webac/W-WEB-090-LIL-1-1-academie-zoe.pilia/views/home.php';
+                    
                 } else {
                     alert('Erreur lors de l\'inscription : ' + response.message);
                 }

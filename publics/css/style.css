@@ -73,6 +73,14 @@ body.theme-sombre a, body.theme-sombre .wrapper-left-elements a {
     color: var(--link-color-dark);
 }
 
+body.theme-sombre .home-follow-count {
+    color: var(--link-color-dark) !important;
+}
+
+.count-following-i:hover, .count-followers-i:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
 /*
 #all .wrapper-left-elements a {
     color: var(--link-color-light);
@@ -269,6 +277,7 @@ body.theme-sombre .form-control, body.theme-sombre .search-input {
 }
 
 #all .input-border-none {
+    /* eliminates the border when the input is active */
     outline: none;
 }
 
@@ -457,9 +466,6 @@ button:focus {
 #all .home-follow i:hover {
     border-bottom: 2px solid black;
 }
-
-/* BOX-POST */
-
 
 
 /* POSTS OF TWITTER */
@@ -745,20 +751,14 @@ button:focus {
     color: white;
 }
 
-#whathappen textarea{
+textarea{
     width: 100%;
-    background-color: var(--background-color-light);
+    background-color: inherit;
     border: none;
     color: black;
     font-size: 16px;
     padding: 10px;
     height: 90%;
-}
-
-body.theme-sombre #whathappen textarea{
-    background-color: var(--sidebar-bg-color-dark);
-    color: var(--text-color-dark);
-    border-color: var(--color-nav-border);
 }
 
 #whathappen ::placeholder{
