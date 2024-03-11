@@ -163,7 +163,7 @@ class Authentificator implements AuthentificatorInterface {
                 }
             } else {
 
-                $reponse = [
+                $response = [
                     'status' => 'error',
                     'message' => 'Votre compte à été désactivé, veuillez en créer un autre'
                 ];
@@ -174,7 +174,7 @@ class Authentificator implements AuthentificatorInterface {
 
         } else {
 
-            $reponse = [
+            $response = [
                 'status' => 'error',
                 'message' => 'Aucun utilisateur trouvé veuillez créer un compte'
             ];
