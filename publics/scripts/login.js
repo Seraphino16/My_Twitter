@@ -3,7 +3,7 @@
 function loginUser() {
 
     const formData = {
- 
+
         email: $('#email').val(),
         password: $('#password').val(),
         form_type: 'login' 
@@ -22,11 +22,11 @@ function loginUser() {
                     const fullname = user.firstname + ' ' + user.lastname; 
                     const username = user.username;
                     const id = user.id;
-                    
+
                     sessionStorage.setItem('id', id);
                     sessionStorage.setItem('fullname', fullname);
                     sessionStorage.setItem('username', username);
-    
+
                     window.location.href = '../views/home.php';
                     
                 } else {
