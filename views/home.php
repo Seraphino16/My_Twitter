@@ -30,7 +30,7 @@ include '../controller/UserController.php';
                                 <i class="bi bi-house-fill"></i>
                             </div>
                             <div class="wrapper-left-elements mt-1">
-                                <a class="wrapper-left-active" href="/Webac/W-WEB-090-LIL-1-1-academie-zoe.pilia/views/home.php"><strong>Accueil</strong></a>
+                                <a class="wrapper-left-active" href="home.php"><strong>Accueil</strong></a>
                             </div>
                         </div>
                     </a>
@@ -50,7 +50,7 @@ include '../controller/UserController.php';
                                 <i class="bi bi-person-fill"></i>
                             </div>
                             <div class="wrapper-left-elements mt-1">
-                                <a  href="/Webac/W-WEB-090-LIL-1-1-academie-zoe.pilia/views/profil.php"><strong>Profile</strong></a>
+                                <a  href="profil.php"><strong>Profile</strong></a>
                             </div>
                         </div>
                     </a>
@@ -175,6 +175,7 @@ include '../controller/UserController.php';
     <script src="../publics/scripts/colorMode.js"></script>
     <script src="../publics/scripts/tweet.js"></script>
     <script src="../publics/scripts/home.js"></script>
+    <script src="../publics/scripts/logout.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>

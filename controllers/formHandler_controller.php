@@ -23,7 +23,10 @@ class FormHandler {
         } elseif (isset($formData['form_type']) && $formData['form_type'] === 'login') {
             $this->authentificator->login($formData);
        
+        } elseif (isset($formData['form_type']) && $formData['form_type'] === 'logout') {
+                $this->authentificator->logout($formData);
         } else {
+
             $response = [
                 'status' => 'error',
                 'message' => 'Formulaire non trouvé'

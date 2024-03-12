@@ -140,10 +140,10 @@ class Authentificator implements AuthentificatorInterface {
     
                     $_SESSION['user_id'] = $user['id'];
 
-                    $cookie_name = "user_id";
+                    $cookie_name = 'user_id';
                     $cookie_value = $user['id'];
                     $cookie_expiration = time() + (86400 * 30);
-                    setcookie($cookie_name, $cookie_value, $cookie_expiration, "/");
+                    setcookie($cookie_name, $cookie_value, $cookie_expiration, '/');
     
                     $response = [
                         'status' => 'success',
@@ -182,6 +182,16 @@ class Authentificator implements AuthentificatorInterface {
             echo json_encode($response);
         }
  
+    }
+
+    public function logout() {
+
+        setcookie('user_id', '', time() - 3600, '/');
+
+        session_unset();
+        session_destroy();
+
+        echo json_encode(array('status' => 'success'));
     }
 }
 
