@@ -18,6 +18,8 @@ function loginUser() {
 
                 if (response.status === 'success') {
 
+                    alert(JSON.stringify(response));
+
                     const user = response.message; 
                     const fullname = user.firstname + ' ' + user.lastname; 
                     const username = user.username;

@@ -34,14 +34,43 @@ function getUserInfos(id) {
             
             if (response.status === 'success') {
 
-                const Info = response.data;
+                console.log(response);
 
-                $('.bio').text(Info.bio);
-                $('.location').text(Info.location);
+                const user = response.data;
+
+                if(user.bio !== null && user.bio.length !== 0) {
+                    $(".bio").text(user.bio);
+                }
+                
+                if(user.localisation !== null && user.localisation.length !== 0) {
+                     $(".bi-geo-alt-fill").text(user.localisation);
+                     $(".bi-geo-alt-fill").css("color", "gray");
+                } else {
+                    $(".bi-geo-alt-fill").parent().parent().css("display", "none");
+                }
+
+           
+               if(user.website !== null && user.website.length !== 0) {
+                   $(".fa-link").css("color", "gray");
+
+                    const websiteLink = `<a href="${user.website}" target="_blank">${user.website}</a>`;
+                    $(".fa-link").after(' ', websiteLink);
+               } else {
+                   $(".website-url").parent().parent().css("display", "none");
+               }
+                
+                    let joinedDate = formatJoinedDate(user.created_at);
+
+                    $(".bi-calendar-event").text(joinedDate);
+                    $(".bi-calendar-event").css("color", "gray");
+
+               
                 
             } else {
                 console.error('Erreur lors de la récupération des informations supplémentaires.');
             }
+
+            
         },
         error: function(xhr, status, error) {
                 console.log('Erreur AJAX : ');
@@ -51,6 +80,16 @@ function getUserInfos(id) {
                 alert('Erreur AJAX : ' + status);
         }
     });
+
+    function formatJoinedDate (dateString) {
+
+        let newDate = new Date(dateString)
+    
+        let year = newDate.getFullYear()
+        let month = newDate.toLocaleString("en-us", { month: "long"});
+    
+        return " Joined " + month + " " + year;
+    }
 }
 
 /*$(document).ready(function () {

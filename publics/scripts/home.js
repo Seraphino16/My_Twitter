@@ -1,6 +1,8 @@
 $(document).ready(function() {
+
     const fullname = sessionStorage.getItem('fullname');
     const username = sessionStorage.getItem('username');
+    
     
     if (fullname && username) {
 
