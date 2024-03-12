@@ -146,12 +146,13 @@ include '../controller/UserController.php';
                             </div>
                         </div>
                     </div>
-                    <div class="box-fixed" id="box-fixed"></div>
-                    <div class="box-tweet">
+                    <div class="box-fixed" id="box-fixed">
+                        <div class="box-tweet">
                             <div class="tweet-container">
                                 
                             </div>
                         </div>
+                    </div>
                 </div>
 
 

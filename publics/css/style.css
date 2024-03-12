@@ -1,10 +1,13 @@
 :root {
     --color-twitter-light-blue: rgb(234, 245, 252);
     --color-twitter-blue:       rgb(72,  161, 235);
+    --color-twitter-green:      rgb(22,  207, 22);
+    --color-twitter-red:        rgb(224, 36, 94);
     --color-twitter-bg:         rgb(231, 236, 239);
     --color-twitter-light-gray: rgb(245, 248, 250);
     --color-twitter-mid-gray:   rgb(206, 214, 220);
     --color-twitter-dark-gray:  rgb(102, 117, 130);
+    --color-twitter-username:   rgb(140, 154, 165);
     --color-font-main:          rgb(0, 0, 0);
     --color-font-secondary:     #14171a;
     --color-nav-border:         rgba(0, 0, 0, 0.25);
@@ -51,13 +54,20 @@ body.theme-sombre {
     color: var(--text-color-dark);
 }
 
-.sidebar-left, .grid-sidebar, #all .wrapper-left, #all .grid-sidebar, #all .box-user, #all .grid-user, #all .grid-posts, #all .border-right, #all .grid-toolbar-center, #all .input-group-login, #all .container, #all .part-1, #all .wrapper-right, #all .box-share {
+.bg-index {
+    background-color: var(--color-twitter-blue);
+}
+
+.sidebar-left, .grid-sidebar, #all .wrapper-left, #all .grid-sidebar, #all .box-user, #all .grid-user, #all .grid-posts, #all .border-right, #all .grid-toolbar-center, #all .input-group-login, #all .container, #all .part-1, #all .wrapper-right, #all .box-share,
+#all .box-tweet, #all .tweet-container {
     background-color: var(--sidebar-bg-color-light);
     color: var(--text-color-light);
     border-color: var(--color-nav-border);
 }
 
-body.theme-sombre .sidebar-left, body.theme-sombre .grid-sidebar, body.theme-sombre #all .wrapper-left, body.theme-sombre #all .grid-sidebar, body.theme-sombre #all .box-user, body.theme-sombre #all .grid-user, body.theme-sombre #all .grid-posts, body.theme-sombre #all .border-right, body.theme-sombre #all .grid-toolbar-center, body.theme-sombre #all .input-group-login, body.theme-sombre #all .container, body.theme-sombre #all .part-1, body.theme-sombre #all .wrapper-right, body.theme-sombre #all .box-share {
+body.theme-sombre .sidebar-left, body.theme-sombre .grid-sidebar, body.theme-sombre #all .wrapper-left, body.theme-sombre #all .grid-sidebar, body.theme-sombre #all .box-user, body.theme-sombre #all .grid-user, body.theme-sombre #all .grid-posts,
+body.theme-sombre #all .border-right, body.theme-sombre #all .grid-toolbar-center, body.theme-sombre #all .input-group-login, body.theme-sombre #all .container, body.theme-sombre #all .part-1, body.theme-sombre #all .wrapper-right,
+body.theme-sombre #all .box-share, body.theme-sombre #all .box-tweet, body.theme-sombre #all .tweet-container {
     background-color: var(--sidebar-bg-color-dark);
     color: var(--text-color-dark);
     border-color: var(--color-nav-border);
@@ -73,14 +83,6 @@ body.theme-sombre a, body.theme-sombre .wrapper-left-elements a {
     color: var(--link-color-dark);
 }
 
-body.theme-sombre .home-follow-count {
-    color: var(--link-color-dark) !important;
-}
-
-.count-following-i:hover, .count-followers-i:hover {
-    cursor: pointer;
-    text-decoration: underline;
-}
 /*
 #all .wrapper-left-elements a {
     color: var(--link-color-light);
@@ -183,7 +185,7 @@ body.theme-sombre .form-control, body.theme-sombre .search-input {
 }
 
 /* BUTTON TWITTEAR */
-#all  .button-twittear {
+#all .button-twittear {
     display: inline-block;
     color: #ffffff;
     height: 49px;
@@ -211,20 +213,21 @@ body.theme-sombre .form-control, body.theme-sombre .search-input {
 }
 
 #all .box-user {
-    position: fixed;
-    right: 0;
-    bottom: 25px;
-    left: 50px;
+    margin-top: 125%;
+    padding: 4%;
 }
 
 #all .grid-user {
     display: grid;
-    grid-template-columns: 4% 12.5% 2%;
+    grid-template-columns: 20% auto;
+    align-items: center;
+    padding: 4%;
+    column-gap: 6%;
 }
 
 #all .img-user {
-    height: 39px;
-    width: 39px;
+    height: 49px;
+    width: 49px;
     border-radius: 50px;
 }
 
@@ -235,7 +238,7 @@ body.theme-sombre .form-control, body.theme-sombre .search-input {
 #all .username {
     margin-top: 3px;
     font-size: 15px;
-    color: #8c9aa5;
+    color: var(--color-twitter-username);
 }
 
 /* INPUT SEARCH*/
@@ -277,7 +280,6 @@ body.theme-sombre .form-control, body.theme-sombre .search-input {
 }
 
 #all .input-border-none {
-    /* eliminates the border when the input is active */
     outline: none;
 }
 
@@ -291,16 +293,6 @@ body.theme-sombre .form-control, body.theme-sombre .search-input {
 }
 
 /* BOX OF INPUT */
-#all .box-fixed {
-    position: fixed;
-    width: 33%;
-    left: 25.4%;
-    top: 40px;
-    -webkit-box-shadow: 0 3px 5px -1px rgba(204, 174, 204, 1);
-    -moz-box-shadow: 0 3px 5px -1px rgba(204, 174, 204, 1);
-    box-shadow: 0 3px 5px -1px rgba(204, 174, 204, 1);
-}
-
 #all .grid-toolbar-center {
     display: grid;
     grid-template-columns: 95% 10%;
@@ -354,7 +346,7 @@ body.theme-sombre #all .box-home {
 
 #all .box-home .box-name .home-tweets-num {
     font-size: 13px;
-    color: #8c9aa5;
+    color: var(--color-twitter-username);
 }
 
 #all .box-home .home-img-user {
@@ -467,174 +459,92 @@ button:focus {
     border-bottom: 2px solid black;
 }
 
-
+/* BOX-POST */
 /* POSTS OF TWITTER */
-#all .box-tweet {
-    margin-top: 15px;
-    margin-left: 27%;
-    transition: 0.5s;
-    cursor: pointer;
+#all .box-fixed {
+    margin: 2% 1.5% 0 29%;
 }
 
-#all .box-tweet:hover {
-    transition: 0.5s;
-    background-color: #f8f8f8;
+#all .tweet {
+    margin: 3% auto 2%;
+    padding: 2%;
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0, rgba(255, 255, 255, 0.8) -6px -2px 16px 0;
 }
 
-#all .box-comment {
-    margin-top: 5px;
-    margin-left: 27%;
-    transition: 0.5s;
-    cursor: pointer;
-}
-
-#all .box-reply {
-    margin-top: 5px;
-    margin-left: 31%;
-    transition: 0.5s;
-    cursor: pointer;
-}
-
-#all .box-comment:hover {
-    transition: 0.5s;
-    background-color: #f8f8f8;
-}
-
-#all .box-reply:hover {
-    transition: 0.5s;
-    background-color: #f8f8f8;
-}
-
-#all .img-user-tweet {
-    height: 49px;
-    width: 49px;
-    border-radius: 50px;
-}
-
-#all .grid-tweet {
+#all .tweet-header {
     display: grid;
-    grid-template-columns: 10% 90%;
-    margin-left: 15px;
-    margin-right: 2px;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 5px;
 }
 
-#all .username-twitter {
-    color: #6a7b8a;
-    font-size: 15px;
-}
-
-#all .img-post-tweet {
-    height: 285.19px;
-    width: 507px;
-    border-radius: 10px;
-}
-
-#all .img-post-retweet {
-    height: 250px;
-    width: 450px;
-    border-radius: 10px;
-}
-
-/* handle upload img place */
-#all .img-upload-tmp {
-    height: 250px;
-    width: 450px;
-    border-radius: 10px;
-    margin-left: 30px;
-}
-
-#all .upload-delete {
-    top: 20px;
-    right:70px;
-    color:red;
-    font-size:22px ;
-    font-weight:800;
-    z-index: 23;
-    cursor:pointer;
-}
-
-.upload-photo {
-    display: none;
-}
-
-#all .mt-post-tweet {
-    margin-top: 10px;
-}
-
-/* TOOLBAR REACTIONS */
-#all .grid-reactions {
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    position: relative;
-    z-index: 20;
-}
-
-#all  .grid-box-reaction{
-    display: grid;
-    grid-template-columns: 30% 10%;
-    padding-top: 8px;
-}
-
-#all  .grid-box-reaction-rep{
-    display: grid;
-    grid-template-columns: 30% 10%;
-    padding-top: 4px;
-    font-size: 15px;
-}
-
-#all .hover-reaction{
-    padding: 5px 0 5px 0;
-    height: 38px;
+#all .tweet-header .tweet-profile {
+    height: 47px;
+    width: 47px;
     border-radius: 50%;
+    margin: 3px 6px;
+}
+
+#all .tweet-text {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 5px;
+    margin-top: -3%;
+}
+
+#all .tweet-author {
+    font-weight: bold;
+}
+
+#all .tweet-author-handle {
+    font-size: 13px;
+    margin-top: 2px;
+    color: var(--color-twitter-username);
+}
+
+#all .tweet-message {
+    padding: 2%;
+    margin-left: 8%;
+    margin-top: -5%;
+}
+
+#all .tweet-content {
+    margin: -4% 2% 8% 10%;
+}
+
+#all .tweet-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
     text-align: center;
-    padding-top: 5px;
+    margin: 2% auto -1%;
 }
 
-#all .hover-reaction-rep{
-    /* padding: 5px 0 5px 0; */
-    height: 20px;
-    border-radius: 50%;
-    text-align: center;
-    /* padding-top: 5px; */
+#all .tweet-stats .fa-comment:hover {
+    cursor: pointer;
+    color: var(--color-twitter-blue);
 }
 
-#all .hover-reaction-comment:hover {
-    background-color: #bee4fb;
-    color: #1DA1F2;
+#all .tweet-stats .fa-retweet:hover {
+    cursor: pointer;
+    color: var(--color-twitter-green);
 }
 
-#all .hover-reaction-retweet:hover {
-    background-color: #fafbed;
-    color: rgb(22, 207, 22);
+#all .tweet-stats .fa-heart:hover {
+    cursor: pointer;
+    color: var(--color-twitter-red);
 }
 
-#all .hover-reaction-like:hover {
-    background-color: rgb(255, 228, 228);
-    color: red;
-
-}
-
-#all .unlike-btn {
-    color: red;
-
-}
-
-#all .mt-counter{
-    /* padding: 5px 0 5px 0; */
-    margin-left: 2px;
-}
 
 /* BOX-SHARE */
 #all .box-share{
-    margin: 20px;
-    margin-right: 60px;
+    margin: 20px 60px 20px 20px;
     border-radius: 10px;
     background-color: #F5F8FA;
 }
 
 #all .box-share-users{
-    margin: 5px;
-    margin-right: 15px;
+    margin: 5px 15px 5px 5px;
     border-radius: 10px;
     background-color: #ffffff;
 }
@@ -658,7 +568,7 @@ button:focus {
 }
 
 #all  .txt-share{
-    font-size: 18.5px;
+    font-size: 19px;
     padding: 10px;
 }
 
@@ -725,14 +635,10 @@ button:focus {
 #whathappen button{
     border: 1px solid rgb(211, 223, 233);;
     border-radius:50%;
-
     color: white;
     background-color: rgb(211, 223, 233);
     transition: 1s;
-
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 5px 10px;
 
 }
 
@@ -751,14 +657,20 @@ button:focus {
     color: white;
 }
 
-textarea{
+#whathappen textarea{
     width: 100%;
-    background-color: inherit;
+    background-color: var(--background-color-light);
     border: none;
     color: black;
     font-size: 16px;
     padding: 10px;
     height: 90%;
+}
+
+body.theme-sombre #whathappen textarea{
+    background-color: var(--sidebar-bg-color-dark);
+    color: var(--text-color-dark);
+    border-color: var(--color-nav-border);
 }
 
 #whathappen ::placeholder{
@@ -1050,11 +962,9 @@ textarea{
     position: absolute;
     z-index: 50;
     background: white;
-    background-color: white;
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
-    box-shadow: 0px 0px 10px 0px #cacaca;
-    background-color: white;
+    box-shadow: 0 0 10px 0 #cacaca;
     display: block;
     overflow: auto;
     max-height: 250px;
@@ -1062,10 +972,7 @@ textarea{
 }
 
 .hash-box ul li{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 15px;
+    padding: 10px 15px 10px 10px;
     font-weight: bold;
     cursor: pointer;
 }
@@ -1193,14 +1100,6 @@ textarea{
     border-radius: 0px;
     border: 1px solid #dedede;
 }
-
-/*.retweet-popup-inner-body{
-
-}
-
-.retweet-popup-inner-body-inner{
-
-}*/
 
 .retweet-popup-comment-wrap{
     width: 95%;
@@ -1397,6 +1296,11 @@ textarea{
     text-decoration: none;
 }
 
+/* .option {
+     position: relative;
+    z-index: 0; */
+    /* display: flex; 
+} */
 
 .notify-count {
     position: absolute;
@@ -1453,15 +1357,8 @@ textarea{
         margin-left: 13%;
         margin-top: 10px;
     }
-    .box-fixed {
-        position: fixed;
-        width: 33%;
-        left: 5.4%;
-        top: 40px;
-        -webkit-box-shadow: 0px 3px 5px -1px rgba(204, 174, 204, 1);
-        -moz-box-shadow: 0px 3px 5px -1px rgba(204, 174, 204, 1);
-        box-shadow: 0px 3px 5px -1px rgba(204, 174, 204, 1);
-    }
+
+
     #all .box-tweet {
         margin-top: 15px;
         margin-left: 8%;
@@ -1578,15 +1475,7 @@ textarea{
         margin-left: 13%;
         margin-top: 10px;
     }
-    .box-fixed {
-        position: fixed;
-        width: 33%;
-        left: 5.4%;
-        top: 40px;
-        -webkit-box-shadow: 0px 3px 5px -1px rgba(204, 174, 204, 1);
-        -moz-box-shadow: 0px 3px 5px -1px rgba(204, 174, 204, 1);
-        box-shadow: 0px 3px 5px -1px rgba(204, 174, 204, 1);
-    }
+
     #all .box-tweet {
         margin-top: 15px;
         margin-left: 8%;
