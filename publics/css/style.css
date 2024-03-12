@@ -1397,11 +1397,6 @@ textarea{
     text-decoration: none;
 }
 
-.option {
-    /* position: relative;
-    z-index: 0; */
-    /* display: flex; */
-}
 
 .notify-count {
     position: absolute;
