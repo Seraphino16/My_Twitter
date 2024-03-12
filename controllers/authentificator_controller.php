@@ -85,6 +85,9 @@ class Authentificator implements AuthentificatorInterface {
 
                     if ($user) {
 
+                        // insert a line in users_preferences with the new user id
+                        $createPreferences = $this->authModel->createUserPreferences($user['id']);
+
                         session_start();
     
                         $_SESSION['user_id'] = $user['id'];

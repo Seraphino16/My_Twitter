@@ -10,9 +10,10 @@ class User
     private $db;
     public $id_user;
 
-    public function __construct($db)
+    public function __construct($db, $id = 16)
     {
         $this->db = $db;
+        $this->id_user = $id;
     }
 
     public function fetchCurrentUser ()

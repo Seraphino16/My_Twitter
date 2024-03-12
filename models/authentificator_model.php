@@ -34,6 +34,17 @@ class AuthModel {
         return $result;
     }
 
+    private function createUserPreferences ($id)
+    {
+        $query = 'INSERT INTO users_preferences (user_id)
+                    VALUES (:id)';
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(":id", $id);
+
+        return $stmt->execute();
+    }
+
     public function loginUser($email) {
 
         $query = 'SELECT * FROM users WHERE email = :email';

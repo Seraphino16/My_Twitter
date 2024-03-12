@@ -6,11 +6,11 @@ $(document).ready(function() {
     
     if (fullname && username) {
      
-        $('.fullname').html('<strong>' + fullname + '</strong>');
-        $('.username').text('@' + username);
+        // $('.fullname').html('<strong>' + fullname + '</strong>');
+        // $('.username').text('@' + username);
 
-        $('.fullname').text(fullname);
-        $('.pseudo').text('@' + username);
+        // $('.fullname').text(fullname);
+        // $('.pseudo').text('@' + username);
 
     
         getUserInfos(id);
@@ -53,6 +53,9 @@ function getUserInfos(id) {
                 console.log(response);
 
                 const user = response.data;
+
+                $(".pseudo").text("@" + user.username);
+                $(".fullname").text(user.firstname);
 
                 if(user.bio !== null && user.bio.length !== 0) {
                     $(".bio").text(user.bio);
