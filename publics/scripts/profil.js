@@ -28,6 +28,9 @@ $(document).ready(function() {
             getFollowersList(id);
         });
 
+        $("#saveUpdateBtn").click(function () {
+            updateProfile();
+        });
         
     }
 });
@@ -103,75 +106,75 @@ function getUserInfos(id) {
     });
 
 }
-    function formatJoinedDate (dateString) {
 
-        let newDate = new Date(dateString)
-    
-        let year = newDate.getFullYear()
-        let month = newDate.toLocaleString("en-us", { month: "long"});
-    
-        return " Joined " + month + " " + year;
-    }
+function formatJoinedDate (dateString) {
 
-    
-    function getUserFollowers(id) {
-    
-        const formData = {
-            id: id,
-            action: "getNbFollowers"
-        };
-    
-        $.ajax({
-            url: "../controllers/user_controller.php",
-            method: "POST",
-            data: formData,
-            dataType: 'json',
-            success: function (data) {
-                console.log(JSON.stringify(data));
-                $(".count-followers").text(data.nbFollowers);
-            },
-            
-        });
-    }
+    let newDate = new Date(dateString)
 
-    function getUserFollows(id) {
+    let year = newDate.getFullYear()
+    let month = newDate.toLocaleString("en-us", { month: "long"});
 
-        const formData = {
-            id: id,
-            action: "getNbFollows"
-        };
-    
-        $.ajax({
-            
-            url: "../controllers/user_controller.php",
-            method: "POST",
-            data: formData,
-            dataType: 'json',
-            success: function (data) {
-                console.log(JSON.stringify(data));
-                $(".count-following").text(data.nbFollows);
-            }
-        });
-    
-    }
+    return " Joined " + month + " " + year;
+}
 
-    function getFollowersList(id) {
+function getUserFollowers(id) {
 
-        const formData = {
-            id: id,
-            action: "getNbFollowersList"
-        };
-    
-        $.ajax({
-            url: "../controllers/user_controller.php",
-            method: "POST",
-            data: formData,
-            dataType: 'json',
-            success: function(data) {
-                let followers = JSON.parse(data.getFollowersList);
-                console.log(followers);
-            }
+    const formData = {
+        id: id,
+        action: "getNbFollowers"
+    };
+
+    $.ajax({
+        url: "../controllers/user_controller.php",
+        method: "POST",
+        data: formData,
+        dataType: 'json',
+        success: function (data) {
+            console.log(JSON.stringify(data));
+            $(".count-followers").text(data.nbFollowers);
+        },
+        
     });
+}
+
+function getUserFollows(id) {
+
+    const formData = {
+        id: id,
+        action: "getNbFollows"
+    };
+
+    $.ajax({
+        
+        url: "../controllers/user_controller.php",
+        method: "POST",
+        data: formData,
+        dataType: 'json',
+        success: function (data) {
+            console.log(JSON.stringify(data));
+            $(".count-following").text(data.nbFollows);
+        }
+    });
+
+}
+
+function getFollowersList(id) {
+
+    const formData = {
+        id: id,
+        action: "getNbFollowersList"
+    };
+
+    $.ajax({
+        url: "../controllers/user_controller.php",
+        method: "POST",
+        data: formData,
+        dataType: 'json',
+        success: function(data) {
+            let followers = JSON.parse(data.getFollowersList);
+            console.log(followers);
+        }
+    }); 
 }
 
 
@@ -190,6 +193,25 @@ function getFollowsList(id) {
         success: function(data) {
             let follows = JSON.parse(data.followsList);
             console.log(follows);
+        }
+    });
+}
+
+function updateProfile() {
+
+    const formData = {
+        firstname: $("#nameForm").val(),
+        bio: $("#bioForm").val(),
+        location: $("#locationForm").val(),
+        url: $("#urlForm").val(),
+    }
+    
+    $.ajax({
+        url: "../../controllers/updateProfile.php",
+        method: "POST",
+        data: formData,
+        success: function(data) {
+            console.log(data);
         }
     });
 }
