@@ -14,8 +14,24 @@ $(document).ready(function() {
 
     
         getUserInfos(id);
+        getUserFollowers(id);
+        getUserFollows(id);
+
+        $(".count-followers-i").click(function () {
+            console.log('click follows list');
+            getFollowsList(id);
+            
+        });
+
+        $(".count-followers-i").click(function () {
+            console.log('click followers list');
+            getFollowersList(id);
+        });
+
+        
     }
 });
+
 
 
 function getUserInfos(id) {
@@ -79,8 +95,11 @@ function getUserInfos(id) {
                 console.log('responseText: ' + xhr.responseText);
                 alert('Erreur AJAX : ' + status);
         }
+
+        
     });
 
+}
     function formatJoinedDate (dateString) {
 
         let newDate = new Date(dateString)
@@ -90,7 +109,99 @@ function getUserInfos(id) {
     
         return " Joined " + month + " " + year;
     }
+
+    
+    function getUserFollowers(id) {
+    
+        const formData = {
+            id: id,
+            action: "getNbFollowers"
+        };
+    
+        $.ajax({
+            url: "../controllers/user_controller.php",
+            method: "POST",
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                console.log(JSON.stringify(data));
+                $(".count-followers").text(data.nbFollowers);
+            },
+            
+        });
+    }
+
+    function getUserFollows(id) {
+
+        const formData = {
+            id: id,
+            action: "getNbFollows"
+        };
+    
+        $.ajax({
+            
+            url: "../controllers/user_controller.php",
+            method: "POST",
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                console.log(JSON.stringify(data));
+                $(".count-following").text(data.nbFollows);
+            }
+        });
+    
+    }
+
+    function getFollowersList(id) {
+
+        const formData = {
+            id: id,
+            action: "getNbFollowersList"
+        };
+    
+        $.ajax({
+            url: "../controllers/user_controller.php",
+            method: "POST",
+            data: formData,
+            dataType: 'json',
+            success: function(data) {
+                let followers = JSON.parse(data.getFollowersList);
+                console.log(followers);
+            }
+    });
 }
+
+
+function getFollowsList(id) {
+
+    const formData = {
+        id: id,
+        action: "getNbFollowsList"
+    };
+
+    $.ajax({
+        url: "../controllers/user_controller.php",
+        method: "POST",
+        data: formData,
+        dataType: 'json',
+        success: function(data) {
+            let follows = JSON.parse(data.followsList);
+            console.log(follows);
+        }
+    });
+}
+  
+
+
+
+
+
+
+
+
+
+
+
 
 /*$(document).ready(function () {
     console.log("Hello");
@@ -348,5 +459,5 @@ $(".count-followers-i").click(function () {
             let followers = JSON.parse(data);
             console.log(followers);
         }
-    })
+    });
 })*/

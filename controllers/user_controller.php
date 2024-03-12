@@ -23,7 +23,7 @@ if(isset($_POST["action"])) {
             $userData = $user->fetchCurrentUser();
             
             $response = [
-                'status' => 'success',
+                "status" => "success",
                 "data" => $userData
             ];
             break;

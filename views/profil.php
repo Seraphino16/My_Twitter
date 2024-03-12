@@ -27,7 +27,7 @@
                                 <i class="bi bi-house-fill"></i>
                             </div>
                             <div class="wrapper-left-elements mt-1">
-                                <a href=""><strong>Accueil</strong></a>
+                                <a href="home.php"><strong>Accueil</strong></a>
                             </div>
                         </div>
                     </a>
@@ -47,7 +47,7 @@
                                 <i class="bi bi-person-fill"></i>
                             </div>
                             <div class="wrapper-left-elements mt-1">
-                                <a class="wrapper-left-active" href=""><strong>Profile</strong></a>
+                                <a class="wrapper-left-active" href="profil.php"><strong>Profile</strong></a>
                             </div>
                         </div>
                     </a>
