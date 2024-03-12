@@ -52,6 +52,15 @@ if(isset($_POST["action"])) {
         
             $response["tweets"] = $tweets;
             break;
+        case "updateProfile":
+            $firstname = $_POST['firstname'];
+            $bio = $_POST['bio'];
+            $location = $_POST['location'];
+            $url = $_POST["url"];
+
+            $data = $user->updateProfile($firstname, $bio, $location, $url);
+            $response["data"] = $data;
+            break;
         default:
             $response['status'] = 'error';
             $response['message'] = 'Action non valide';

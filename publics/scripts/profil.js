@@ -29,7 +29,7 @@ $(document).ready(function() {
         });
 
         $("#saveUpdateBtn").click(function () {
-            updateProfile();
+            updateProfile(id);
         });
         
     }
@@ -205,27 +205,30 @@ function displayFormUpdate (user) {
     $("#urlForm").val(user.website);
 }
 
-function updateProfile() {
+function updateProfile(id) {
 
     const formData = {
+        id: id,
+        action: "updateProfile",
         firstname: $("#nameForm").val(),
         bio: $("#bioForm").val(),
         location: $("#locationForm").val(),
         url: $("#urlForm").val(),
     }
+
+    console.log(formData);
     
     $.ajax({
-        url: "../../controllers/updateProfile.php",
+        url: "../../controllers/user_controller.php",
         method: "POST",
         data: formData,
+        // dataType: "json",
         success: function(data) {
+            // console.log(JSON.stringify(data));
             console.log(data);
         }
     });
 }
-  
-
-
 
 
 

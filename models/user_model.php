@@ -109,5 +109,27 @@ class User
 
         return $getTweets->fetchAll();
     }
+
+    public function updateProfile ($firstname, $bio, $location, $url)
+    {
+        $query = "UPDATE users
+        JOIN users_preferences
+            ON users.id = users_preferences.user_id
+        SET
+            users.firstname = :firstname,
+            users_preferences.bio = :bio,
+            users_preferences.localisation = :location,
+            users_preferences.website = :url
+        WHERE users.id = :id_user";
+
+        $updateProfile = $this->db->prepare($query);
+        $updateProfile->bindParam(":firstname", $firstname);
+        $updateProfile->bindParam(":bio", $bio);
+        $updateProfile->bindParam(":location", $location);
+        $updateProfile->bindParam(":url", $url);
+        $updateProfile->bindParam(":id_user", $this->id_user);
+
+        return $updateProfile->execute();
+    }
 }
 
