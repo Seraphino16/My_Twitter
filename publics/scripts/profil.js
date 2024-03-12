@@ -27,14 +27,12 @@ function getUserInfos(id) {
 
     $.ajax({
         type: 'POST',
-        url: '/Webac/W-WEB-090-LIL-1-1-academie-zoe.pilia/controllers/user_controller.php',
+        url: '../controllers/user_controller.php',
         data: formData,
         dataType: 'json',
         success: function(response) {
             
             if (response.status === 'success') {
-
-                alert(JSON.stringify(response));
 
                 const Info = response.data;
 
