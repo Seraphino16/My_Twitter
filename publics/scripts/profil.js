@@ -65,27 +65,28 @@ function getUserInfos(id) {
                 }
                 
                 if(user.localisation !== null && user.localisation.length !== 0) {
-                     $(".bi-geo-alt-fill").text(user.localisation);
-                     $(".bi-geo-alt-fill").css("color", "gray");
+                    $(".bi-geo-alt-fill").text(user.localisation);
+                    $(".bi-geo-alt-fill").css("color", "gray");
                 } else {
                     $(".bi-geo-alt-fill").parent().parent().css("display", "none");
                 }
 
            
-               if(user.website !== null && user.website.length !== 0) {
-                   $(".fa-link").css("color", "gray");
+                if(user.website !== null && user.website.length !== 0) {
+                    $(".fa-link").css("color", "gray");
 
                     const websiteLink = `<a href="${user.website}" target="_blank">${user.website}</a>`;
                     $(".fa-link").after(' ', websiteLink);
-               } else {
-                   $(".website-url").parent().parent().css("display", "none");
-               }
+                } else {
+                    $(".website-url").parent().parent().css("display", "none");
+                }
                 
-                    let joinedDate = formatJoinedDate(user.created_at);
+                let joinedDate = formatJoinedDate(user.created_at);
 
-                    $(".bi-calendar-event").text(joinedDate);
-                    $(".bi-calendar-event").css("color", "gray");
+                $(".bi-calendar-event").text(joinedDate);
+                $(".bi-calendar-event").css("color", "gray");
 
+                displayFormUpdate(user);
                
                 
             } else {
@@ -195,6 +196,13 @@ function getFollowsList(id) {
             console.log(follows);
         }
     });
+}
+
+function displayFormUpdate (user) {
+    $("#nameForm").val(user.firstname);
+    $("#bioForm").val(user.bio);
+    $("#locationForm").val(user.localisation);
+    $("#urlForm").val(user.website);
 }
 
 function updateProfile() {
