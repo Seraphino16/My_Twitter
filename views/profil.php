@@ -79,8 +79,8 @@
                         <div class="grid-user">
                             <div><img src="../publics/img/profile.png" alt="user" class="img-user"/></div>
                             <div>
-                                <p class="name fullname"><strong>Name</strong></p>
-                                <p class="username pseudo">@Pseudo</p>
+                                <p class="name" id="sessionFullname"><strong>Name</strong></p>
+                                <p class="username" id="sessionPseudo">@Pseudo</p>
                             </div>
                             <div class="mt-arrow">
                                 <!--

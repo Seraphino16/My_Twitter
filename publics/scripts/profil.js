@@ -32,6 +32,13 @@ $(document).ready(function() {
         $("#saveUpdateBtn").click(function () {
             updateProfile(id, selectedUsername);
         });
+
+
+        console.log(fullname);
+        console.log($("#sessionFullname"));
+        $('#sessionFullname').html('<strong>' + fullname + '</strong>');
+
+        $('#sessionPseudo').text("@" + username);
         
     }
 });
