@@ -17,14 +17,8 @@ $(document).ready(function() {
         getUserFollowers(id);
         getUserFollows(id);
 
-        $(".count-following-i").click(function () {
-            getFollowsList(id);
-            
-        });
-
-        $(".count-followers-i").click(function () {
-            getFollowersList(id);
-        });
+        getFollowsList(id);
+        getFollowersList(id);
 
         $("#saveUpdateBtn").click(function () {
             updateProfile(id);
@@ -159,6 +153,8 @@ function getUserFollows(id) {
 
 function getFollowersList(id) {
 
+    const modalFollowers = $("#followers-modal .modal-body").get(0);
+
     const formData = {
         id: id,
         action: "getFollowersList"
@@ -171,12 +167,16 @@ function getFollowersList(id) {
         dataType: 'json',
         success: function(data) {
             console.log(data);
+            ul = displayList(data.followersList);
+            modalFollowers.appendChild(ul);
         }
     }); 
 }
 
 
 function getFollowsList(id) {
+
+    const modalFollowing = $("#following-modal .modal-body").get(0);
 
     const formData = {
         id: id,
@@ -189,10 +189,32 @@ function getFollowsList(id) {
         data: formData,
         dataType: 'json',
         success: function(data) {
-            console.log(data);
-            console.log(data.followsList);
+            ul = displayList(data.followsList);
+            modalFollowing.appendChild(ul);
         }
     });
+}
+
+function displayList(users) {
+
+    
+
+    let ul = document.createElement("ul");
+
+    users.forEach(user => {
+        let li = document.createElement("li");
+        let link = document.createElement("a");
+
+        console.log(user);
+
+        link.innerHTML = user.username;
+
+
+        li.appendChild(link);
+        ul.appendChild(li);
+    });
+
+    return ul;
 }
 
 function displayFormUpdate (user) {
