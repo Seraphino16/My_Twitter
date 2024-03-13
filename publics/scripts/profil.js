@@ -197,17 +197,18 @@ function getFollowsList(id) {
 
 function displayList(users) {
 
-    
-
     let ul = document.createElement("ul");
 
     users.forEach(user => {
         let li = document.createElement("li");
         let link = document.createElement("a");
 
-        console.log(user);
+        let profileURL = "views/profil.php/" + encodeURIComponent(user.username);
+        $(link).attr('href', profileURL).text(user.username);
 
-        link.innerHTML = user.username;
+        // console.log(user);
+
+        // link.innerHTML = user.username;
 
 
         li.appendChild(link);
