@@ -9,11 +9,27 @@ class User
 
     private $db;
     public $id_user;
+    public $username;
 
-    public function __construct($db, $id = 16)
+    public function __construct($db, $username)
     {
         $this->db = $db;
-        $this->id_user = $id;
+        $this->username= $username;
+        // $this->id_user = $id;
+        // $this->$username = $username
+        $this->getUserId();
+    }
+
+    private function getUserId ()
+    {
+        $query = "SELECT users.id
+                FROM users
+                WHERE users.username = :username";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(":username", $this->username);
+        $stmt->execute();
+        $this->id_user = $stmt->fetchColumn();
     }
 
     public function fetchCurrentUser ()

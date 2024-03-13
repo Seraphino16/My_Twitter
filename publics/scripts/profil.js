@@ -3,6 +3,15 @@ $(document).ready(function() {
     const fullname = sessionStorage.getItem('fullname');
     const username = sessionStorage.getItem('username');
     const id = sessionStorage.getItem('id');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    let selectedUsername = urlParams.get('user');
+
+    if(selectedUsername === null) {
+        selectedUsername = username;
+    }
+
+    console.log(selectedUsername);
     
     if (fullname && username) {
      
@@ -13,15 +22,15 @@ $(document).ready(function() {
         // $('.pseudo').text('@' + username);
 
     
-        getUserInfos(id);
-        getUserFollowers(id);
-        getUserFollows(id);
+        getUserInfos(id, selectedUsername);
+        getUserFollowers(id, selectedUsername);
+        getUserFollows(id, selectedUsername);
 
-        getFollowsList(id);
-        getFollowersList(id);
+        getFollowsList(id, selectedUsername);
+        getFollowersList(id, selectedUsername);
 
         $("#saveUpdateBtn").click(function () {
-            updateProfile(id);
+            updateProfile(id, selectedUsername);
         });
         
     }
@@ -29,11 +38,12 @@ $(document).ready(function() {
 
 
 
-function getUserInfos(id) {
+function getUserInfos(id, selectedUsername) {
 
     const formData = {
         id: id,
-        action: "fetchCurrentUser"
+        username: selectedUsername,
+        action: "fetchCurrentUser",
     };
 
     $.ajax({
@@ -110,11 +120,12 @@ function formatJoinedDate (dateString) {
     return " Joined " + month + " " + year;
 }
 
-function getUserFollowers(id) {
+function getUserFollowers(id, selectedUsername) {
 
     const formData = {
         id: id,
-        action: "getNbFollowers"
+        username: selectedUsername,
+        action: "getNbFollowers",
     };
 
     $.ajax({
@@ -130,11 +141,12 @@ function getUserFollowers(id) {
     });
 }
 
-function getUserFollows(id) {
+function getUserFollows(id, selectedUsername) {
 
     const formData = {
         id: id,
-        action: "getNbFollows"
+        username: selectedUsername,
+        action: "getNbFollows",
     };
 
     $.ajax({
@@ -151,12 +163,13 @@ function getUserFollows(id) {
 
 }
 
-function getFollowersList(id) {
+function getFollowersList(id, selectedUsername) {
 
     const modalFollowers = $("#followers-modal .modal-body").get(0);
 
     const formData = {
         id: id,
+        username: selectedUsername,
         action: "getFollowersList"
     };
 
@@ -174,12 +187,13 @@ function getFollowersList(id) {
 }
 
 
-function getFollowsList(id) {
+function getFollowsList(id, selectedUsername) {
 
     const modalFollowing = $("#following-modal .modal-body").get(0);
 
     const formData = {
         id: id,
+        username: selectedUsername,
         action: "getFollowsList"
     };
 
@@ -203,13 +217,9 @@ function displayList(users) {
         let li = document.createElement("li");
         let link = document.createElement("a");
 
-        let profileURL = "views/profil.php/" + encodeURIComponent(user.username);
+        // Creation de l'url pour le profil sur lequel on clique
+        let profileURL = "profil.php?user=" + encodeURIComponent(user.username);
         $(link).attr('href', profileURL).text(user.username);
-
-        // console.log(user);
-
-        // link.innerHTML = user.username;
-
 
         li.appendChild(link);
         ul.appendChild(li);
@@ -225,10 +235,13 @@ function displayFormUpdate (user) {
     $("#urlForm").val(user.website);
 }
 
-function updateProfile(id) {
+function updateProfile(id, selectedUsername) {
+
+    console.log(selectedUsername);
 
     const formData = {
         id: id,
+        username: selectedUsername,
         action: "updateProfile",
         firstname: $("#nameForm").val(),
         bio: $("#bioForm").val(),
@@ -244,7 +257,7 @@ function updateProfile(id) {
         data: formData,
         // dataType: "json",
         success: function(data) {
-            // console.log(data);
+            console.log(data);
             location.reload()
         }
     });
