@@ -83,7 +83,7 @@ function generateTweetHTML(fullname, username, message, date) {
     const html = `
         <div class="tweet">
             <div class="tweet-header">
-                <img src="../public/img/profile.png" alt="profile photo" class="tweet-profile">
+                <img src="../publics/img/profile.png" alt="profile photo" class="tweet-profile">
                 <div class="tweet-text">
                     <div class="tweet-author">${fullname}</div>
                     <div class="tweet-author-handle">@${username} · ${displayTime}</div>
