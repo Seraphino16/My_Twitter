@@ -147,5 +147,9 @@ class User
 
         return $updateProfile->execute();
     }
+
+    public function checkFollow ($checkedUsername) {
+        
+    }
 }
 

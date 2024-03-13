@@ -11,7 +11,17 @@ $(document).ready(function() {
         selectedUsername = username;
     }
 
-    console.log(selectedUsername);
+    getConnectedUserFollows(id, username);
+
+    // if(selectedUsername !== username) {
+    //     if(isFollowed) {
+    //         displayUnfollowBtn();
+    //     } else {
+    //         displayFollowBtn();
+    //     }
+    // } else {
+    //    console.log("Edit profile");
+    // }
     
     if (fullname && username) {
      
@@ -26,6 +36,10 @@ $(document).ready(function() {
         getUserFollowers(id, selectedUsername);
         getUserFollows(id, selectedUsername);
 
+        // let ConnectedFollowsList = getUserFollows(id, username);;
+        // console.log(ConnectedFollowsList);
+
+
         getFollowsList(id, selectedUsername);
         getFollowersList(id, selectedUsername);
 
@@ -33,8 +47,6 @@ $(document).ready(function() {
             updateProfile(id, selectedUsername);
         });
 
-
-        console.log(fullname);
         console.log($("#sessionFullname"));
         $('#sessionFullname').html('<strong>' + fullname + '</strong>');
 
@@ -141,7 +153,6 @@ function getUserFollowers(id, selectedUsername) {
         data: formData,
         dataType: 'json',
         success: function (data) {
-            console.log(JSON.stringify(data));
             $(".count-followers").text(data.nbFollowers);
         },
         
@@ -163,7 +174,6 @@ function getUserFollows(id, selectedUsername) {
         data: formData,
         dataType: 'json',
         success: function (data) {
-            console.log(JSON.stringify(data));
             $(".count-following").text(data.nbFollows);
         }
     });
@@ -186,7 +196,6 @@ function getFollowersList(id, selectedUsername) {
         data: formData,
         dataType: 'json',
         success: function(data) {
-            console.log(data);
             ul = displayList(data.followersList);
             modalFollowers.appendChild(ul);
         }
@@ -212,6 +221,7 @@ function getFollowsList(id, selectedUsername) {
         success: function(data) {
             ul = displayList(data.followsList);
             modalFollowing.appendChild(ul);
+            return data.followsList;
         }
     });
 }
@@ -244,8 +254,6 @@ function displayFormUpdate (user) {
 
 function updateProfile(id, selectedUsername) {
 
-    console.log(selectedUsername);
-
     const formData = {
         id: id,
         username: selectedUsername,
@@ -255,8 +263,6 @@ function updateProfile(id, selectedUsername) {
         location: $("#locationForm").val(),
         url: $("#urlForm").val(),
     }
-
-    console.log(formData);
     
     $.ajax({
         url: "../../controllers/user_controller.php",
@@ -264,15 +270,59 @@ function updateProfile(id, selectedUsername) {
         data: formData,
         // dataType: "json",
         success: function(data) {
-            console.log(data);
             location.reload()
         }
     });
 }
 
+function displayUnfollowBtn () {
+    console.log("Unfollow Button");
+}
+
+function displayFollowBtn () {
+    console.log("Follow button")
+}
 
 
 
+function getConnectedUserFollows (id, username) {
+
+    const formData = {
+        id: id,
+        username: username,
+        action: "getFollowsList"
+    };
+
+    $.ajax({
+        url: "../controllers/user_controller.php",
+        method: "POST",
+        data: formData,
+        dataType: 'json',
+        success: function(data) {
+            console.log(data.followsList);
+            return data.followsList;
+        }
+    });
+}
+
+function checkFollow (id, connectedUser, checkedUser) {
+
+    const formData = {
+        id: id,
+        username: connectedUser,
+        checkedUser: checkedUser,
+        action: "checkFollows",
+    }
+
+    $.ajax({
+        url: "../controllers/user_controller.php",
+        method: "POST",
+        dataType: "json",
+        success: function(data) {
+            console.log(data);
+        }
+    })
+}
 
 
 
