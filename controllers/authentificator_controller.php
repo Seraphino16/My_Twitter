@@ -86,25 +86,28 @@ class Authentificator implements AuthentificatorInterface {
                     if ($user) {
 
                         // insert a line in users_preferences with the new user id
-                        $createPreferences = $this->authModel->createUserPreferences($user['id']);
+                        //$createPreferences = $this->authModel->createUserPreferences($user['id']);
 
-                        session_start();
-    
-                        $_SESSION['user_id'] = $user['id'];
+                            session_start();
+        
+                            $_SESSION['user_id'] = $user['id'];
 
-                        $cookie_name = "user_id";
-                        $cookie_value = $user['id'];
+                        $userDataJSON = json_encode($user);
+
                         $cookie_expiration = time() + (86400 * 30);
-                        setcookie($cookie_name, $cookie_value, $cookie_expiration, "/");
-                    }
-    
-                    $response = [
-                        'status' => 'success',
-                        'message' => 'Inscription réussie !',
-                        'user' => $user 
-                    ];
+                        setcookie('user_data', $userDataJSON, $cookie_expiration, '/');
+                            
+                        $response = [
+                            'status' => 'success',
+                            'message' => 'Inscription réussie !',
+                            'cookie_data' => $_COOKIE['user_data']
+                        ];
 
-                    echo json_encode($response);
+                        echo json_encode($response);
+                    
+                    }
+
+                   
     
                 } else {
     
@@ -143,14 +146,14 @@ class Authentificator implements AuthentificatorInterface {
     
                     $_SESSION['user_id'] = $user['id'];
 
-                    $cookie_name = 'user_id';
-                    $cookie_value = $user['id'];
+                    $userDataJSON = json_encode($user);
+
                     $cookie_expiration = time() + (86400 * 30);
-                    setcookie($cookie_name, $cookie_value, $cookie_expiration, '/');
+                    setcookie('user_data', $userDataJSON, $cookie_expiration, '/');
     
                     $response = [
                         'status' => 'success',
-                        'message' => $user
+                        'cookie_data' => $_COOKIE['user_data']
                     ];
                     
                     echo json_encode($response);

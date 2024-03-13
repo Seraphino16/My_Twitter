@@ -19,9 +19,9 @@ class User
     public function fetchCurrentUser ()
     {
 
-        $query = "SELECT users.*, users_preferences.*
+        $query = "SELECT users.*, users_preferences.*, users.created_at
                 FROM users
-                JOIN users_preferences
+                LEFT JOIN users_preferences
                 ON users.id = users_preferences.user_id
                 WHERE users.id = :id";
 

@@ -18,17 +18,6 @@ function loginUser() {
 
                 if (response.status === 'success') {
 
-                    alert(JSON.stringify(response));
-
-                    const user = response.message; 
-                    const fullname = user.firstname + ' ' + user.lastname; 
-                    const username = user.username;
-                    const id = user.id;
-
-                    sessionStorage.setItem('id', id);
-                    sessionStorage.setItem('fullname', fullname);
-                    sessionStorage.setItem('username', username);
-
                     window.location.href = '../views/home.php';
                     
                 } else {
@@ -59,3 +48,15 @@ $(document).ready(function() {
         loginUser();
     });
 });
+
+// Fonction pour récupérer la valeur d'un cookie
+function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+        const [cookieName, cookieValue] = cookie.split('=');
+        if (cookieName.trim() === name) {
+            return decodeURIComponent(cookieValue);
+        }
+    }
+    return null;
+}

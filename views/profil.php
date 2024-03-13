@@ -37,7 +37,7 @@
                                 <i class="bi bi-hash"></i>
                             </div>
                             <div class="wrapper-left-elements mt-1">
-                                <a href=""><strong>Explorer</strong></a>
+                                <a href="explore.php"><strong>Explorer</strong></a>
                             </div>
                         </div>
                     </a>

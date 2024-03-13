@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore | Tweet Academie</title>
     <link rel="shortcut icon" type="image/png" href="../public/img/logo_onglet.png">
-    <link rel="stylesheet" href="../public/css/style.css">
+    <    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -27,7 +27,7 @@
                             <i class="bi bi-house-fill"></i>
                         </div>
                         <div class="wrapper-left-elements mt-1">
-                            <a href=""><strong>Accueil</strong></a>
+                            <a href="home.php"><strong>Accueil</strong></a>
                         </div>
                     </div>
                 </a>
@@ -37,7 +37,7 @@
                             <i class="bi bi-hash"></i>
                         </div>
                         <div class="wrapper-left-elements mt-1">
-                            <a class="wrapper-left-active" href=""><strong>Explorer</strong></a>
+                            <a class="wrapper-left-active" href="explore.php"><strong>Explorer</strong></a>
                         </div>
                     </div>
                 </a>
@@ -47,7 +47,7 @@
                             <i class="bi bi-person-fill"></i>
                         </div>
                         <div class="wrapper-left-elements mt-1">
-                            <a  href=""><strong>Profile</strong></a>
+                            <a  href="profile.php"><strong>Profile</strong></a>
                         </div>
                     </div>
                 </a>
