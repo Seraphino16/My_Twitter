@@ -1314,6 +1314,10 @@ body.theme-sombre #whathappen textarea{
     font-weight: 500;
 }
 
+.count-following-i:hover, .count-followers-i:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
 
 @media only screen and (max-width: 800px) {
     html {

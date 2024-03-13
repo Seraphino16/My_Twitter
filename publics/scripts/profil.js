@@ -17,14 +17,12 @@ $(document).ready(function() {
         getUserFollowers(id);
         getUserFollows(id);
 
-        $(".count-followers-i").click(function () {
-            console.log('click follows list');
+        $(".count-following-i").click(function () {
             getFollowsList(id);
             
         });
 
         $(".count-followers-i").click(function () {
-            console.log('click followers list');
             getFollowersList(id);
         });
 
@@ -163,7 +161,7 @@ function getFollowersList(id) {
 
     const formData = {
         id: id,
-        action: "getNbFollowersList"
+        action: "getFollowersList"
     };
 
     $.ajax({
@@ -172,8 +170,7 @@ function getFollowersList(id) {
         data: formData,
         dataType: 'json',
         success: function(data) {
-            let followers = JSON.parse(data.getFollowersList);
-            console.log(followers);
+            console.log(data);
         }
     }); 
 }
@@ -183,7 +180,7 @@ function getFollowsList(id) {
 
     const formData = {
         id: id,
-        action: "getNbFollowsList"
+        action: "getFollowsList"
     };
 
     $.ajax({
@@ -192,8 +189,8 @@ function getFollowsList(id) {
         data: formData,
         dataType: 'json',
         success: function(data) {
-            let follows = JSON.parse(data.followsList);
-            console.log(follows);
+            console.log(data);
+            console.log(data.followsList);
         }
     });
 }
