@@ -224,8 +224,8 @@ function updateProfile(id) {
         data: formData,
         // dataType: "json",
         success: function(data) {
-            // console.log(JSON.stringify(data));
-            console.log(data);
+            // console.log(data);
+            location.reload()
         }
     });
 }
