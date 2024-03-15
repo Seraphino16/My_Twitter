@@ -116,11 +116,9 @@ function searchHashtags(searchTerm) {
 
             response.forEach(hashtag => {
 
-                const createdAt = hashtag.created_at.split(' ')[0];
-                
                 const hashtagResult =  `<div class="tweet">
                 <a href="explore.php?tag=${encodeURIComponent(hashtag.name)}" class="hashtag-link">${hashtag.name}</a>
-                <p class="created-at">Créé le ${createdAt}</p>
+                <p>${hashtag.hashtag_count} publications</p>
             </div>`
                 $('#resultsContent').append(hashtagResult);
 

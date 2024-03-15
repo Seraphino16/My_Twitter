@@ -34,10 +34,12 @@ class ExploreModel {
     }
 
     public function searchHashtags($searchTerm) {
-        $query = 'SELECT *
+        $query = 'SELECT hashtag.name, COUNT(*) as hashtag_count, MAX(hashtag.created_at) as latest_created_at
                     FROM hashtag
+                    LEFT JOIN tweet ON hashtag.tweet_id = tweet.id
                     WHERE name LIKE LOWER(:searchTerm)
-                    ORDER BY created_at DESC';
+                    GROUP BY hashtag.name
+                    ORDER BY latest_created_at DESC';
 
         
         $searchTerm = $searchTerm . '%';
