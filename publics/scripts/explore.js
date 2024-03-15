@@ -17,13 +17,21 @@ $(document).ready(function() {
         $('.username').text('@' + username);
     }
 
-    $('#searchButton').click(function () {
+    $('.search-input').keyup(function () {
 
         console.log('click');
 
-        const searchTerm = $('#searchInput').val();
+        const searchTerm = $('#searchInput').val().trim();
 
-        searchUsers(searchTerm);
+        if (searchTerm.length > 0) {
+            if (searchTerm.startsWith('#')) {
+                searchHashtags(searchTerm);
+            } else {
+                searchUsers(searchTerm);
+            }
+        } else {
+            $('#resultsContent').empty();
+        }
     });
 }
 
@@ -94,13 +102,30 @@ function searchUsers(searchTerm) {
 }
 
 
-function formatJoinedDate (dateString) {
+function searchHashtags(searchTerm) {
+    $.ajax({
+        type: 'POST',
+        url: '../controllers/explore_controller.php',
+        data: { searchTerm: searchTerm },
+        dataType: 'json',
+        success: function(response) {
 
-    let newDate = new Date(dateString)
+            console.log(response);
 
-    let year = newDate.getFullYear()
-    let month = newDate.toLocaleString("en-us", { month: "long"});
+            $('#resultsContent').empty();
 
-    return " Joined " + month + " " + year;
+            response.forEach(hashtag => {
+
+                const createdAt = hashtag.created_at.split(' ')[0];
+                
+                const hashtagResult =  `<div class="tweet">
+                <a href="explore.php?tag=${encodeURIComponent(hashtag.name)}" class="hashtag-link">${hashtag.name}</a>
+                <p class="created-at">Créé le ${createdAt}</p>
+            </div>`
+                $('#resultsContent').append(hashtagResult);
+
+            });
+        }
+    });
 }
 

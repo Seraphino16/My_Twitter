@@ -9,14 +9,18 @@ class ExploreController {
         $this->exploreModel = $exploreModel;
     }
 
-    public function searchUsers() {
+    public function search() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $searchResults = [];
-
+    
             if (isset($_POST['searchTerm'])) {
                 $searchTerm = $_POST['searchTerm'];
 
-                $searchResults = $this->exploreModel->searchUsers($searchTerm);
+                if (strpos($searchTerm, '#') === 0) {
+                    $searchResults = $this->exploreModel->searchHashtags($searchTerm);
+                } else {
+
+                    $searchResults = $this->exploreModel->searchUsers($searchTerm);
+                }
             }
 
             echo json_encode($searchResults);
@@ -27,6 +31,6 @@ class ExploreController {
 
 
 $exploreController = new ExploreController($exploreModel);
-$exploreController->searchUsers($_POST)
+$exploreController->search($_POST)
 
 ?>

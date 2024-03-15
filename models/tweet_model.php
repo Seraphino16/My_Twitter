@@ -117,4 +117,19 @@ class tweetModel {
         }
     }
 
+    public static function createHashtag($tweet_id, $tag){
+        global $db;
+
+        try {
+            $query = "INSERT INTO hashtag (tweet_id, name) VALUES (:tweet_id, :name)";
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(':tweet_id', $tweet_id);
+            $stmt->bindParam(':name', $tag);
+            $stmt->execute();
+            return $db->lastInsertId();
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
 }

@@ -32,6 +32,27 @@ class ExploreModel {
         return $results;
         
     }
+
+    public function searchHashtags($searchTerm) {
+        $query = 'SELECT *
+                    FROM hashtag
+                    WHERE name LIKE LOWER(:searchTerm)
+                    ORDER BY created_at DESC';
+
+        
+        $searchTerm = $searchTerm . '%';
+    
+        $stmt = $this->db->prepare($query);
+
+        $stmt->bindParam(':searchTerm', $searchTerm);
+
+        $stmt->execute();
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $results;
+
+    }
 }
 
 $exploreModel = new ExploreModel($db);

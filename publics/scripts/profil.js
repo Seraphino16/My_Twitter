@@ -1,20 +1,36 @@
 $(document).ready(function() {
 
-    const userDataJSON = getCookie('user_data');
-   
-if (userDataJSON) {
-    console.log("Contenu du cookie : ", userDataJSON);
-    const user = JSON.parse(userDataJSON);
-    const fullname = user.firstname + ' ' + user.lastname;
-    const username = user.username;
-    const id = user.id;
-    
-    console.log(fullname);
-    console.log(username);
-    console.log(id);
+    const fullname = sessionStorage.getItem('fullname');
+    const username = sessionStorage.getItem('username');
+    const id = sessionStorage.getItem('id');
 
+    const urlParams = new URLSearchParams(window.location.search);
+    let selectedUsername = urlParams.get('username');
+
+    if(selectedUsername === null) {
+        selectedUsername = username;
+    }
+
+    if(selectedUsername === username) {
+        $("#follow-btn").remove();
+        $("#unfollow-btn").remove();
+    } else {
+        $("#edit-profile-btn").remove();
+    }
+
+    getConnectedUserFollows(id, username);
+
+    // if(selectedUsername !== username) {
+    //     if(isFollowed) {
+    //         displayUnfollowBtn();
+    //     } else {
+    //         displayFollowBtn();
+    //     }
+    // } else {
+    //    console.log("Edit profile");
+    // }
     
-    if (id && username) {
+    if (fullname && username) {
      
         // $('.fullname').html('<strong>' + fullname + '</strong>');
         // $('.username').text('@' + username);
@@ -23,37 +39,41 @@ if (userDataJSON) {
         // $('.pseudo').text('@' + username);
 
     
-        getUserInfos(id);
-        getUserFollowers(id);
-        getUserFollows(id);
+        getUserInfos(id, selectedUsername);
+        getUserFollowers(id, selectedUsername);
+        getUserFollows(id, selectedUsername);
 
-        $(".count-followers-i").click(function () {
-            console.log('click follows list');
-            getFollowsList(id);
-            
-        });
+        // let ConnectedFollowsList = getUserFollows(id, username);;
+        // console.log(ConnectedFollowsList);
 
-        $(".count-followers-i").click(function () {
-            console.log('click followers list');
-            getFollowersList(id);
-        });
+
+        getFollowsList(id, selectedUsername);
+        getFollowersList(id, selectedUsername);
 
         $("#saveUpdateBtn").click(function () {
-            updateProfile(id);
+            updateProfile(id, selectedUsername);
         });
+
+        $("#unfollow-btn").click(function () {
+            unfollow(id, username, selectedUsername);
+        })
+
+        console.log($("#sessionFullname"));
+        $('#sessionFullname').html('<strong>' + fullname + '</strong>');
+
+        $('#sessionPseudo').text("@" + username);
         
     }
-
-}
 });
 
 
 
-function getUserInfos(id) {
+function getUserInfos(id, selectedUsername) {
 
     const formData = {
         id: id,
-        action: "fetchCurrentUser"
+        username: selectedUsername,
+        action: "fetchCurrentUser",
     };
 
     $.ajax({
@@ -130,11 +150,12 @@ function formatJoinedDate (dateString) {
     return " Joined " + month + " " + year;
 }
 
-function getUserFollowers(id) {
+function getUserFollowers(id, selectedUsername) {
 
     const formData = {
         id: id,
-        action: "getNbFollowers"
+        username: selectedUsername,
+        action: "getNbFollowers",
     };
 
     $.ajax({
@@ -143,18 +164,18 @@ function getUserFollowers(id) {
         data: formData,
         dataType: 'json',
         success: function (data) {
-            console.log(JSON.stringify(data));
             $(".count-followers").text(data.nbFollowers);
         },
         
     });
 }
 
-function getUserFollows(id) {
+function getUserFollows(id, selectedUsername) {
 
     const formData = {
         id: id,
-        action: "getNbFollows"
+        username: selectedUsername,
+        action: "getNbFollows",
     };
 
     $.ajax({
@@ -164,18 +185,20 @@ function getUserFollows(id) {
         data: formData,
         dataType: 'json',
         success: function (data) {
-            console.log(JSON.stringify(data));
             $(".count-following").text(data.nbFollows);
         }
     });
 
 }
 
-function getFollowersList(id) {
+function getFollowersList(id, selectedUsername) {
+
+    const modalFollowers = $("#followers-modal .modal-body").get(0);
 
     const formData = {
         id: id,
-        action: "getNbFollowersList"
+        username: selectedUsername,
+        action: "getFollowersList"
     };
 
     $.ajax({
@@ -184,18 +207,21 @@ function getFollowersList(id) {
         data: formData,
         dataType: 'json',
         success: function(data) {
-            let followers = JSON.parse(data.getFollowersList);
-            console.log(followers);
+            ul = displayList(data.followersList);
+            modalFollowers.appendChild(ul);
         }
     }); 
 }
 
 
-function getFollowsList(id) {
+function getFollowsList(id, selectedUsername) {
+
+    const modalFollowing = $("#following-modal .modal-body").get(0);
 
     const formData = {
         id: id,
-        action: "getNbFollowsList"
+        username: selectedUsername,
+        action: "getFollowsList"
     };
 
     $.ajax({
@@ -204,10 +230,30 @@ function getFollowsList(id) {
         data: formData,
         dataType: 'json',
         success: function(data) {
-            let follows = JSON.parse(data.followsList);
-            console.log(follows);
+            ul = displayList(data.followsList);
+            modalFollowing.appendChild(ul);
+            return data.followsList;
         }
     });
+}
+
+function displayList(users) {
+
+    let ul = document.createElement("ul");
+
+    users.forEach(user => {
+        let li = document.createElement("li");
+        let link = document.createElement("a");
+
+        // Creation de l'url pour le profil sur lequel on clique
+        let profileURL = "profil.php?username=" + encodeURIComponent(user.username);
+        $(link).attr('href', profileURL).text(user.username);
+
+        li.appendChild(link);
+        ul.appendChild(li);
+    });
+
+    return ul;
 }
 
 function displayFormUpdate (user) {
@@ -217,18 +263,17 @@ function displayFormUpdate (user) {
     $("#urlForm").val(user.website);
 }
 
-function updateProfile(id) {
+function updateProfile(id, selectedUsername) {
 
     const formData = {
         id: id,
+        username: selectedUsername,
         action: "updateProfile",
         firstname: $("#nameForm").val(),
         bio: $("#bioForm").val(),
         location: $("#locationForm").val(),
         url: $("#urlForm").val(),
     }
-
-    console.log(formData);
     
     $.ajax({
         url: "../../controllers/user_controller.php",
@@ -236,24 +281,80 @@ function updateProfile(id) {
         data: formData,
         // dataType: "json",
         success: function(data) {
-            // console.log(data);
             location.reload()
         }
     });
 }
 
-function getCookie(name) {
-    const cookies = document.cookie.split(';');
-    for (let cookie of cookies) {
-        const [cookieName, cookieValue] = cookie.split('=');
-        if (cookieName.trim() === name) {
-            return decodeURIComponent(cookieValue);
-        }
-    }
-    return null;
+function displayUnfollowBtn () {
+    console.log("Unfollow Button");
+}
+
+function displayFollowBtn () {
+    console.log("Follow button")
 }
 
 
+
+function getConnectedUserFollows (id, username) {
+
+    const formData = {
+        id: id,
+        username: username,
+        action: "getFollowsList"
+    };
+
+    $.ajax({
+        url: "../controllers/user_controller.php",
+        method: "POST",
+        data: formData,
+        dataType: 'json',
+        success: function(data) {
+            console.log(data.followsList);
+            return data.followsList;
+        }
+    });
+}
+
+function checkFollow (id, connectedUser, checkedUser) {
+
+    const formData = {
+        id: id,
+        username: connectedUser,
+        checkedUser: checkedUser,
+        action: "checkFollows",
+    }
+
+    $.ajax({
+        url: "../controllers/user_controller.php",
+        method: "POST",
+        dataType: "json",
+        success: function(data) {
+            console.log(data);
+        }
+    })
+}
+
+function unfollow (id, currentUser, userToUnfollow) {
+    console.log(currentUser);
+    console.log(userToUnfollow);
+
+    const formData = {
+        action: "unfollow",
+        id: id,
+        username: currentUser,
+        userToUnfollow: userToUnfollow,
+    }
+
+    $.ajax({
+        url: "../controllers/user_controller.php",
+        method: "POST",
+        data: formData,
+        success: function(data) {
+            console.log(data);
+        }
+    })
+}
 
 
 
