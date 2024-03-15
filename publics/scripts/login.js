@@ -18,7 +18,10 @@ function loginUser() {
 
                 if (response.status === 'success') {
 
-                    window.location.href = '../views/home.php';
+                    const userData = JSON.parse(response.cookie_data);
+                    const username = userData.username;
+
+                    window.location.href = `../views/home.php?username=${encodeURIComponent(username)}`;
                     
                 } else {
                     alert('Erreur lors de l\'inscription : ' + response.message);

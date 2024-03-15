@@ -24,20 +24,45 @@ function characterCount() {
 }
 
 $(document).ready(function() {
-    console.log('page chargé');
     const initialCount = parseInt($('#count').text());
 
     // Charger les tweets depuis le stockage local lors du chargement de la page
     loadTweetsFromLocalStorage();
 
+    // Détecter les changements dans le texte du tweet en temps réel
+    $('.text-whathappen').on('input', function() {
+        const text = $(this).val();
+        let newText = text;
+
+        // Vérifier s'il y a des hashtags ou des noms d'utilisateur dans le texte
+        const hashtagsAndUsernames = text.match(/(?:#\w+|@\w+)\b/g) || [];
+
+        // Si des hashtags ou des noms d'utilisateur sont trouvés, les remplacer par des liens
+        if (hashtagsAndUsernames.length > 0) {
+            hashtagsAndUsernames.forEach(function(match) {
+                if (match.startsWith("#")) {
+                    // Hashtag
+                    newText = newText.replace(match, `<a href="#" class="hashtag">${match}</a>`);
+                } else if (match.startsWith("@")) {
+                    // Nom d'utilisateur
+                    newText = newText.replace(match, `<a href="#" class="arobase">${match}</a>`);
+                }
+            });
+        }
+
+        $('#display-text').html(newText);
+    });
+
+
     $('#tweet-input').click(function(e) {
         e.preventDefault();
-        console.log('click sur le bouton tweeet');
 
         // Récupérer le texte entré dans le champ textarea
         const message = $('.text-whathappen').val();
-        console.log(message);
-        const id = sessionStorage.getItem('id');
+        const userDataJSON = getCookie('user_data');
+
+        const user = JSON.parse(userDataJSON);
+        const id = user.id;
         console.log(id);
 
         // Appeler le contrôleur via AJAX pour créer le tweet
@@ -48,20 +73,17 @@ $(document).ready(function() {
             data: { tweet: true, status: message, id: id},
             success: function(response) {
                 if (response.success) {
-
-                    
                     console.log('Fullname:', response.fullname);
                     console.log('Username:', response.username);
                     console.log('Message:', response.message);
+                    console.log('Date:', response.date);
 
-                    // Vérifier si le tweet existe déjà dans la base de données et n'est pas supprimé
-                    if (!response.isDeleted) {
-                        const tweetHTML = generateTweetHTML(response.fullname, response.username, response.message, response.date, response.id);
-                        $('.tweet-container').prepend(tweetHTML);
+                    // Générer l'HTML du tweet avec les hashtags et les noms d'utilisateur
+                    const tweetHTML = generateTweetHTML(response.fullname, response.username, response.message, response.date);
+                    $('.tweet-container').prepend(tweetHTML);
 
-                        // Stocker les informations du tweet dans le stockage local
-                        storeTweetLocally(response);
-                    }
+                    // Stocker les informations du tweet dans le stockage local
+                    storeTweetLocally(response);
 
                     $('form')[0].reset();
                     $('#count').text(initialCount);
@@ -76,7 +98,24 @@ $(document).ready(function() {
     });
 });
 
+
 function generateTweetHTML(fullname, username, message, date) {
+    // Analyser le texte pour détecter les hashtags et les noms d'utilisateur
+    const hashtagsAndUsernames = message.match(/(?:#\w+|@\w+)\b/g) || [];
+    let messageWithLinks = message;
+
+// Si des hashtags ou des noms d'utilisateur sont trouvés, les remplacer par des liens
+    if (hashtagsAndUsernames !== null) {
+        hashtagsAndUsernames.forEach(function(match) {
+            if (match.startsWith("#")) {
+                // Hashtag
+                messageWithLinks = messageWithLinks.replace(match, `<a href="hashtag.php?tag=${encodeURIComponent(match.substr(1))}" class="hashtag">${match}</a>`);
+            } else if (match.startsWith("@")) {
+                // Nom d'utilisateur
+                messageWithLinks = messageWithLinks.replace(match, `<a href="profil.php?username=${encodeURIComponent(match.substr(1))}" class="arobase">${match}</a>`);
+            }
+        });
+    }
 
     const displayTime = calculateTimePassed(date);
 
@@ -89,7 +128,7 @@ function generateTweetHTML(fullname, username, message, date) {
                     <div class="tweet-author-handle">@${username} · ${displayTime}</div>
                 </div>
             </div>
-            <div class="tweet-message">${message}</div>
+            <div class="tweet-message">${messageWithLinks}</div>
             <div class="tweet-stats">
                 <div><i class="far fa-comment"></i> 0</div>
                 <div><i class="fas fa-retweet"></i> 0</div>
@@ -143,3 +182,15 @@ function loadTweetsFromLocalStorage() {
         $('.tweet-container').append(tweetHTML);
     });
 }
+
+function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+        const [cookieName, cookieValue] = cookie.split('=');
+        if (cookieName.trim() === name) {
+            return decodeURIComponent(cookieValue);
+        }
+    }
+    return null;
+}
+
