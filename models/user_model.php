@@ -151,16 +151,19 @@ class User
     public function unfollow ($usernameToUnfollow)
     {
 
-        $userToUnfollow = new User($db, $usernameToUnfollow);
+        $userToUnfollow = new User($this->db, $usernameToUnfollow);
 
         $query = "DELETE FROM followers
                 WHERE follower_id = :current_id
                 AND following_id = :id_user_to_unfollow";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bindParam("current_id", $this->id);
-        $stmt->bindParam("id_user_to_unfollow", $userToUnfollow->id);
-        $stmt->execute();
+        $stmt->bindParam("current_id", $this->id_user);
+        $stmt->bindParam("id_user_to_unfollow", $userToUnfollow->id_user);
+
+        // return $userToUnfollow->id_user;
+
+        return $stmt->execute();
     }
 }
 
