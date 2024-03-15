@@ -130,6 +130,7 @@
                             </div>
                             <div class="row justify-content-between">
                                 <img class="home-img-user" src="../publics/img/profile.png" alt="">
+                                <button id="unfollow-btn" type="button" class="edit-btn">Unfollow</button>
                                 <button id="follow-btn" type="button" class="edit-btn">Follow</button>
                                 <button id="edit-profile-btn" type="button" class="edit-btn" data-bs-toggle="modal" data-bs-target="#update-profile-modal">
                                     Edit Profile

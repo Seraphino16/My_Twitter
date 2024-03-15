@@ -13,6 +13,7 @@ $(document).ready(function() {
 
     if(selectedUsername === username) {
         $("#follow-btn").remove();
+        $("#unfollow-btn").remove();
     } else {
         $("#edit-profile-btn").remove();
     }
@@ -52,6 +53,10 @@ $(document).ready(function() {
         $("#saveUpdateBtn").click(function () {
             updateProfile(id, selectedUsername);
         });
+
+        $("#unfollow-btn").click(function () {
+            unfollow(id, username, selectedUsername);
+        })
 
         console.log($("#sessionFullname"));
         $('#sessionFullname').html('<strong>' + fullname + '</strong>');
@@ -324,6 +329,27 @@ function checkFollow (id, connectedUser, checkedUser) {
         url: "../controllers/user_controller.php",
         method: "POST",
         dataType: "json",
+        success: function(data) {
+            console.log(data);
+        }
+    })
+}
+
+function unfollow (id, currentUser, userToUnfollow) {
+    console.log(currentUser);
+    console.log(userToUnfollow);
+
+    const formData = {
+        action: "unfollow",
+        id: id,
+        username: currentUser,
+        userToUnfollow: userToUnfollow,
+    }
+
+    $.ajax({
+        url: "../controllers/user_controller.php",
+        method: "POST",
+        data: formData,
         success: function(data) {
             console.log(data);
         }
