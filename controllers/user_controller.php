@@ -71,13 +71,20 @@ if(isset($_POST["action"])) {
             $data = $user->updateProfile($firstname, $bio, $location, $url);
             $response["data"] = $data;
             break;
+        case "follow":
+            $userToFollow = $_POST["userToFollow"];
+
+            $isFollow = $user->follow($userToFollow);
+            $response["isFollow"] = $isFollow;
+            break;
+
         case "unfollow":
             $userToUnfollow = $_POST["userToUnfollow"];
-            $response["aaa"] = $userToUnfollow;
 
             $isUnfollow = $user->unfollow($userToUnfollow);
             $response["isUnfollow"] = $isUnfollow;
             break;
+            
         default:
             $response['status'] = 'error';
             $response['message'] = 'Action non valide';

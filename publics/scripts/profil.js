@@ -54,6 +54,10 @@ $(document).ready(function() {
             updateProfile(id, selectedUsername);
         });
 
+        $("#follow-btn").click(function () {
+            follow(id, username, selectedUsername);
+        })
+
         $("#unfollow-btn").click(function () {
             unfollow(id, username, selectedUsername);
         })
@@ -335,9 +339,32 @@ function checkFollow (id, connectedUser, checkedUser) {
     })
 }
 
+function follow (id, currentUser, userToFollow) {
+
+    const formData = {
+        action: "follow",
+        id: id,
+        username: currentUser,
+        userToFollow: userToFollow,
+    }
+
+    $.ajax({
+        url: "../controllers/user_controller.php",
+        method: "POST",
+        data: formData,
+        success: function(data) {
+            data = JSON.parse(data);
+            
+            if(data.isFollow === true) {
+                location.reload()
+            } else {
+                alert("Error");
+            }            
+        }
+    })
+}
+
 function unfollow (id, currentUser, userToUnfollow) {
-    console.log(currentUser);
-    console.log(userToUnfollow);
 
     const formData = {
         action: "unfollow",
@@ -351,7 +378,13 @@ function unfollow (id, currentUser, userToUnfollow) {
         method: "POST",
         data: formData,
         success: function(data) {
-            console.log(data);
+            data = JSON.parse(data);
+
+            if(data.isUnfollow === true) {
+                location.reload()
+            } else {
+                alert("Error");
+            }
         }
     })
 }
