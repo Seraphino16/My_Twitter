@@ -11,6 +11,12 @@ $(document).ready(function() {
         selectedUsername = username;
     }
 
+    if(selectedUsername === username) {
+        $("#follow-btn").remove();
+    } else {
+        $("#edit-profile-btn").remove();
+    }
+
     getConnectedUserFollows(id, username);
 
     // if(selectedUsername !== username) {
