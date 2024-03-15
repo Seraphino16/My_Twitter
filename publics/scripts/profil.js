@@ -5,7 +5,7 @@ $(document).ready(function() {
     const id = sessionStorage.getItem('id');
 
     const urlParams = new URLSearchParams(window.location.search);
-    let selectedUsername = urlParams.get('user');
+    let selectedUsername = urlParams.get('username');
 
     if(selectedUsername === null) {
         selectedUsername = username;
@@ -235,7 +235,7 @@ function displayList(users) {
         let link = document.createElement("a");
 
         // Creation de l'url pour le profil sur lequel on clique
-        let profileURL = "profil.php?user=" + encodeURIComponent(user.username);
+        let profileURL = "profil.php?username=" + encodeURIComponent(user.username);
         $(link).attr('href', profileURL).text(user.username);
 
         li.appendChild(link);
