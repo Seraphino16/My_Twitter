@@ -108,6 +108,10 @@ body.theme-sombre .button-twittear {
     color: var(--button-text-color-dark);
 }
 
+#unfollow-btn {
+    color: #e0544a;
+}
+
 /* Formulaires et Inputs */
 .form-control, .search-input {
     background-color: var(--background-color-light);

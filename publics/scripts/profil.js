@@ -48,7 +48,7 @@ $(document).ready(function() {
 
 
         getFollowsList(id, selectedUsername);
-        getFollowersList(id, selectedUsername);
+        getFollowersList(id, selectedUsername, username);
 
         $("#saveUpdateBtn").click(function () {
             updateProfile(id, selectedUsername);
@@ -195,7 +195,7 @@ function getUserFollows(id, selectedUsername) {
 
 }
 
-function getFollowersList(id, selectedUsername) {
+function getFollowersList(id, selectedUsername, username) {
 
     const modalFollowers = $("#followers-modal .modal-body").get(0);
 
@@ -211,8 +211,11 @@ function getFollowersList(id, selectedUsername) {
         data: formData,
         dataType: 'json',
         success: function(data) {
+            console.log(data);
             ul = displayList(data.followersList);
             modalFollowers.appendChild(ul);
+
+            checkFollow(data.followersList, username);
         }
     }); 
 }
@@ -290,16 +293,6 @@ function updateProfile(id, selectedUsername) {
     });
 }
 
-function displayUnfollowBtn () {
-    console.log("Unfollow Button");
-}
-
-function displayFollowBtn () {
-    console.log("Follow button")
-}
-
-
-
 function getConnectedUserFollows (id, username) {
 
     const formData = {
@@ -314,29 +307,27 @@ function getConnectedUserFollows (id, username) {
         data: formData,
         dataType: 'json',
         success: function(data) {
-            console.log(data.followsList);
             return data.followsList;
         }
     });
 }
 
-function checkFollow (id, connectedUser, checkedUser) {
+function checkFollow (followers, username) {
 
-    const formData = {
-        id: id,
-        username: connectedUser,
-        checkedUser: checkedUser,
-        action: "checkFollows",
-    }
+    let isFollowed = false;
 
-    $.ajax({
-        url: "../controllers/user_controller.php",
-        method: "POST",
-        dataType: "json",
-        success: function(data) {
-            console.log(data);
+    followers.forEach(follower => {
+        console.log(follower.username);
+        if(follower.username === username) {
+            isFollowed = true;
         }
     })
+
+    if(isFollowed) {
+        $("#follow-btn").remove();
+    } else {
+        $("#unfollow-btn").remove();
+    }
 }
 
 function follow (id, currentUser, userToFollow) {
@@ -354,7 +345,7 @@ function follow (id, currentUser, userToFollow) {
         data: formData,
         success: function(data) {
             data = JSON.parse(data);
-            
+
             if(data.isFollow === true) {
                 location.reload()
             } else {
