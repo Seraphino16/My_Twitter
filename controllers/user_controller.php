@@ -19,11 +19,7 @@ if(isset($_POST["username"])) {
 
 $user = new User($db, $username);
 
-// $user->id_user = $id_user;
-
 $response = array();
-
-
 
 if(isset($_POST["action"])) {
     $action = $_POST["action"];

@@ -1,63 +1,49 @@
 $(document).ready(function() {
 
-    
-    const userDataJSON = getCookie('user_data');
-    
-    if (userDataJSON) {
-        console.log("Contenu du cookie : ", userDataJSON);
-        const user = JSON.parse(userDataJSON);
-        const firstname = user.firstname;
-        const username = user.username;
-        const id = user.id;
-        
-        console.log(firstname);
-        console.log(username);
-        console.log(id);
+    const fullname = sessionStorage.getItem('fullname');
+    const username = sessionStorage.getItem('username');
+    const id = sessionStorage.getItem('id');
 
-        const urlParams = new URLSearchParams(window.location.search);
-        let selectedUsername = urlParams.get('username');
-    
-        if(selectedUsername === null) {
-            selectedUsername = username;
-        }
-    
-        if(selectedUsername === username) {
-            $("#follow-btn").remove();
-            $("#unfollow-btn").remove();
-        } else {
-            $("#edit-profile-btn").remove();
-        }
+    const urlParams = new URLSearchParams(window.location.search);
+    let selectedUsername = urlParams.get('username');
 
-        console.log(selectedUsername);
-        
-        if (firstname && username) {
-        
-            getUserInfos(id, selectedUsername);
-            getUserFollowers(id, selectedUsername);
-            getUserFollows(id, selectedUsername);
-    
-            getFollowsList(id, selectedUsername);
-            getFollowersList(id, selectedUsername, username);
-    
-            $("#saveUpdateBtn").click(function () {
-                updateProfile(id, selectedUsername);
-            });
-    
-            $("#follow-btn").click(function () {
-                follow(id, username, selectedUsername);
-            })
-    
-            $("#unfollow-btn").click(function () {
-                unfollow(id, username, selectedUsername);
-            })
-    
-            $('#sessionFullname').html('<strong>' + firstname + '</strong>');
-    
-            $('#sessionPseudo').text("@" + username);
-            
-        }
+    if(selectedUsername === null) {
+        selectedUsername = username;
     }
 
+    if(selectedUsername === username) {
+        $("#follow-btn").remove();
+        $("#unfollow-btn").remove();
+    } else {
+        $("#edit-profile-btn").remove();
+    }
+    
+    if (fullname && username) {
+    
+        getUserInfos(id, selectedUsername);
+        getUserFollowers(id, selectedUsername);
+        getUserFollows(id, selectedUsername);
+
+        getFollowsList(id, selectedUsername);
+        getFollowersList(id, selectedUsername, username);
+
+        $("#saveUpdateBtn").click(function () {
+            updateProfile(id, selectedUsername);
+        });
+
+        $("#follow-btn").click(function () {
+            follow(id, username, selectedUsername);
+        })
+
+        $("#unfollow-btn").click(function () {
+            unfollow(id, username, selectedUsername);
+        })
+
+        $('#sessionFullname').html('<strong>' + fullname + '</strong>');
+
+        $('#sessionPseudo').text("@" + username);
+        
+    }
 });
 
 
@@ -268,7 +254,7 @@ function updateProfile(id, selectedUsername) {
     }
     
     $.ajax({
-        url: "../controllers/user_controller.php",
+        url: "../../controllers/user_controller.php",
         method: "POST",
         data: formData,
         // dataType: "json",
@@ -343,15 +329,4 @@ function unfollow (id, currentUser, userToUnfollow) {
             }
         }
     })
-}
-
-function getCookie(name) {
-    const cookies = document.cookie.split(';');
-    for (let cookie of cookies) {
-        const [cookieName, cookieValue] = cookie.split('=');
-        if (cookieName.trim() === name) {
-            return decodeURIComponent(cookieValue);
-        }
-    }
-    return null;
 }
