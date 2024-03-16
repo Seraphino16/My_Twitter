@@ -9,9 +9,15 @@ if(isset($_POST["id"])) {
     exit;
 }
 
-$user = new User($db);
+if(isset($_POST["username"])) {
+    $username = $_POST["username"];
+} else {
+    echo json_encode("Username not found");
+    echo json_encode($_POST);
+    exit;
+}
 
-$user->id_user = $id_user;
+$user = new User($db, $username);
 
 $response = array();
 
@@ -61,6 +67,20 @@ if(isset($_POST["action"])) {
             $data = $user->updateProfile($firstname, $bio, $location, $url);
             $response["data"] = $data;
             break;
+        case "follow":
+            $userToFollow = $_POST["userToFollow"];
+
+            $isFollow = $user->follow($userToFollow);
+            $response["isFollow"] = $isFollow;
+            break;
+
+        case "unfollow":
+            $userToUnfollow = $_POST["userToUnfollow"];
+
+            $isUnfollow = $user->unfollow($userToUnfollow);
+            $response["isUnfollow"] = $isUnfollow;
+            break;
+            
         default:
             $response['status'] = 'error';
             $response['message'] = 'Action non valide';
@@ -72,6 +92,8 @@ if(isset($_POST["action"])) {
     exit;
 }
 
+$response["USERNAME"] = $user->username;
+$response["ID"] = $user->id_user;
 
 echo json_encode($response);
 ?>

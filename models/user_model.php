@@ -9,11 +9,27 @@ class User
 
     private $db;
     public $id_user;
+    public $username;
 
-    public function __construct($db, $id = 16)
+    public function __construct($db, $username)
     {
         $this->db = $db;
-        $this->id_user = $id;
+        $this->username= $username;
+        // $this->id_user = $id;
+        // $this->$username = $username
+        $this->getUserId();
+    }
+
+    private function getUserId ()
+    {
+        $query = "SELECT users.id
+                FROM users
+                WHERE users.username = :username";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(":username", $this->username);
+        $stmt->execute();
+        $this->id_user = $stmt->fetchColumn();
     }
 
     public function fetchCurrentUser ()
@@ -130,6 +146,52 @@ class User
         $updateProfile->bindParam(":id_user", $this->id_user);
 
         return $updateProfile->execute();
+    }
+
+    public function follow ($usernameToFollow)
+    {
+        $userToFollow = new User($this->db, $usernameToFollow);
+
+
+        $query = "SELECT COUNT(*) FROM followers 
+                WHERE follower_id = :current_id
+                AND following_id = :id_user_to_follow";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(":current_id", $this->id_user);
+        $stmt->bindParam(":id_user_to_follow", $userToFollow->id_user);
+        $stmt->execute();
+        $count = $stmt->fetchColumn();
+
+        if($count === 0) {
+            $query = "INSERT INTO followers (follower_id, following_id)
+                VALUES ((SELECT id from users WHERE id = :current_id),
+                        (SELECT id from users WHERE id = :id_user_to_follow))";
+
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(":current_id", $this->id_user);
+            $stmt->bindParam(":id_user_to_follow", $userToFollow->id_user);
+
+            return $stmt->execute();
+        } else {
+            return "Already followed";
+        }
+
+       
+    }
+
+    public function unfollow ($usernameToUnfollow)
+    {
+        $userToUnfollow = new User($this->db, $usernameToUnfollow);
+
+        $query = "DELETE FROM followers
+                WHERE follower_id = :current_id
+                AND following_id = :id_user_to_unfollow";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(":current_id", $this->id_user);
+        $stmt->bindParam(":id_user_to_unfollow", $userToUnfollow->id_user);
+
+        return $stmt->execute();
     }
 }
 

@@ -34,7 +34,7 @@ class AuthModel {
         return $result;
     }
 
-    private function createUserPreferences ($id)
+    public function createUserPreferences ($id)
     {
         $query = 'INSERT INTO users_preferences (user_id)
                     VALUES (:id)';
