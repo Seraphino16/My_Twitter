@@ -9,6 +9,10 @@ function userLogout() {
 
             if (response.status === 'success') {
 
+                sessionStorage.removeItem('id');
+                sessionStorage.removeItem('fullname');
+                sessionStorage.removeItem('username');
+
                 window.location.href = '../views/index.html';
             }
         

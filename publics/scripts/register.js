@@ -23,6 +23,14 @@ function registerUser() {
             success: function(response) {
 
                 if (response.status === 'success') {
+
+                    const user = JSON.parse(response.user);
+
+                    const fullname = user.firstname + ' ' + user.lastname; 
+
+                    sessionStorage.setItem('id', user.id);
+                    sessionStorage.setItem('fullname', fullname);
+                    sessionStorage.setItem('username', user.username);
                     
                     alert('Inscription réussie !');
 

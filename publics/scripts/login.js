@@ -19,7 +19,18 @@ function loginUser() {
                 if (response.status === 'success') {
 
                     const userData = JSON.parse(response.cookie_data);
+
+                    const user = JSON.parse(response.user);
+
+                    console.log(response.user);
                     const username = userData.username;
+
+                    const fullname = user.firstname + ' ' + user.lastname; 
+                    const id = user.id;
+
+                    sessionStorage.setItem('id', id);
+                    sessionStorage.setItem('fullname', fullname);
+                    sessionStorage.setItem('username', user.username);
 
                     window.location.href = `../views/home.php?username=${encodeURIComponent(username)}`;
                     

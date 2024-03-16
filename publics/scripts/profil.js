@@ -4,6 +4,8 @@ $(document).ready(function() {
     const username = sessionStorage.getItem('username');
     const id = sessionStorage.getItem('id');
 
+    console.log(fullname);
+
     const urlParams = new URLSearchParams(window.location.search);
     let selectedUsername = urlParams.get('username');
 
@@ -70,6 +72,7 @@ function getUserInfos(id, selectedUsername) {
                 $(".pseudo").text("@" + user.username);
                 $(".fullname").text(user.firstname);
 
+                console.log(response)
                 if(user.bio !== null && user.bio.length !== 0) {
                     $(".bio").text(user.bio);
                 }

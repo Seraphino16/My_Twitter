@@ -86,7 +86,7 @@ class Authentificator implements AuthentificatorInterface {
                     if ($user) {
 
                         // insert a line in users_preferences with the new user id
-                        //$createPreferences = $this->authModel->createUserPreferences($user['id']);
+                        $createPreferences = $this->authModel->createUserPreferences($user['id']);
 
                             session_start();
         
@@ -100,7 +100,8 @@ class Authentificator implements AuthentificatorInterface {
                         $response = [
                             'status' => 'success',
                             'message' => 'Inscription réussie !',
-                            'cookie_data' => $_COOKIE['user_data']
+                            'cookie_data' => $_COOKIE['user_data'],
+                            'user' => $userDataJSON,
                         ];
 
                         echo json_encode($response);
@@ -153,7 +154,8 @@ class Authentificator implements AuthentificatorInterface {
     
                     $response = [
                         'status' => 'success',
-                        'cookie_data' => $_COOKIE['user_data']
+                        'cookie_data' => $_COOKIE['user_data'],
+                        'user' => $userDataJSON,
                     ];
                     
                     echo json_encode($response);

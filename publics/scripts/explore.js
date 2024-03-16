@@ -6,14 +6,13 @@ $(document).ready(function() {
 
     if (userDataJSON) {
         const user = JSON.parse(userDataJSON);
-        const firstname = user.firstname;
+        const fullname = user.firstname + ' ' + user.lastname;
         const username = user.username;
         const id = user.id;
 
-    if (firstname && username) {
-        
+    if (fullname && username) {
 
-        $('.name').html('<strong>' + firstname + '</strong>');
+        $('.name').html('<strong>' + fullname + '</strong>');
         $('.username').text('@' + username);
     }
 
