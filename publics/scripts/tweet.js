@@ -1,7 +1,3 @@
-$(document).ready(function () {
-    characterCount();
-});
-
 // Compter le nombre de caractères dans le champ de texte
 function characterCount() {
     const textField = document.querySelector('.text-whathappen');
@@ -78,12 +74,17 @@ $(document).ready(function() {
         // Récupérer le texte entré dans le champ textarea
         const message = $('.text-whathappen').val();
 
+        const userDataJSON = getCookie('user_data');
+        const user = JSON.parse(userDataJSON);
+        const id = user.id;
+        console.log(id);
+
         // Appeler le contrôleur via AJAX pour créer le tweet
         $.ajax({
             url: '../controllers/tweet_controller.php',
             type: 'POST',
             dataType: 'json',
-            data: { tweet: true, status: message },
+            data: { tweet: true, status: message, id: id },
             success: function(response) {
                 if (response.success) {
 
@@ -105,6 +106,27 @@ $(document).ready(function() {
             }
         });
     });
+
+    // Gestionnaire d'événements pour le clic sur l'icône de coeur
+    $('.tweet-container').on('click', '.fa-heart', function() {
+        const likeCount = $(this).siblings('.like-count');
+        let currentCount = parseInt(likeCount.text());
+        const isLiked = $(this).hasClass('fas');
+
+        if (isLiked) {
+            currentCount--;
+            $(this).removeClass('fas').addClass('far');
+            $(this).css('color', '');
+        } else {
+            currentCount++;
+            $(this).removeClass('far').addClass('fas');
+            $(this).css('color', 'var(--color-twitter-red)');
+        }
+
+        // Mettez à jour le texte du compteur de likes
+        likeCount.text(currentCount);
+    });
+
 });
 
 // Compter le nombre de caractères dans le champ de texte
@@ -143,11 +165,11 @@ function generateTweetHTML(fullname, username, message, date) {
                 // Hashtag
                 const hashtagWithoutHash = match.substr(1); // Supprimer le préfixe '#'
                 const exploreUrl = `explore.php?tag=${encodeURIComponent(hashtagWithoutHash)}`;
-                messageWithLinks = messageWithLinks.replace(match, `<a href="${exploreUrl}" class="hashtag-link">${match}</a>`);
+                messageWithLinks = messageWithLinks.replace(match, `<a href="${exploreUrl}" class="hashtag explore-link">${match}</a>`);
             } else if (match.startsWith("@")) {
                 // Nom d'utilisateur
                 const usernameWithoutAt = match.substr(1); // Supprimer le préfixe '@'
-                const profileUrl = `profile.php?username=${encodeURIComponent(usernameWithoutAt)}`;
+                const profileUrl = `profil.php?username=${encodeURIComponent(usernameWithoutAt)}`;
                 messageWithLinks = messageWithLinks.replace(match, `<a href="${profileUrl}" class="arobase profile-link">${match}</a>`);
             }
         });
@@ -158,7 +180,7 @@ function generateTweetHTML(fullname, username, message, date) {
     const html = `
         <div class="tweet">
             <div class="tweet-header">
-                <img src="../public/img/profile.png" alt="profile photo" class="tweet-profile">
+                <img src="../publics/img/profile.png" alt="profile photo" class="tweet-profile">
                 <div class="tweet-text">
                     <div class="tweet-author">${fullname}</div>
                     <div class="tweet-author-handle">@${username} · ${displayTime}</div>
@@ -168,14 +190,12 @@ function generateTweetHTML(fullname, username, message, date) {
             <div class="tweet-stats">
                 <div><i class="far fa-comment"></i> 0</div>
                 <div><i class="fas fa-retweet"></i> 0</div>
-                <div><i class="far fa-heart"></i> 0</div>
+                <div><i class="far fa-heart like"></i> <span class="like-count"> 0</span></div>
             </div>
         </div>
     `;
     return html;
 }
-
-
 
 function calculateTimePassed(date){
 

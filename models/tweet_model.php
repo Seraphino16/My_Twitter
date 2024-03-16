@@ -66,6 +66,7 @@ class userModel {
     }
 }
 
+
 class tweetModel {
     public $id;
     public $user_id;
@@ -85,6 +86,8 @@ class tweetModel {
         $this->created_at = $created_at;
         $this->updated_at = $updated_at;
     }
+
+    //insertion/creation d'un tweet
     public static function createTweet($userId, $message) {
         global $db;
 
@@ -100,6 +103,7 @@ class tweetModel {
         }
     }
 
+    //recuperation de la date de creation d'un tweet
     public static function getCreatedAtByID($id){
         global $db;
 
@@ -115,6 +119,7 @@ class tweetModel {
         }
     }
 
+    //insertion/creation d'un hashtag
     public static function createHashtag($tweet_id, $tag){
         global $db;
 
@@ -129,5 +134,4 @@ class tweetModel {
             return false;
         }
     }
-
 }
