@@ -143,7 +143,7 @@ function generateTweetHTML(fullname, username, message, date) {
                 // Hashtag
                 const hashtagWithoutHash = match.substr(1); // Supprimer le préfixe '#'
                 const exploreUrl = `explore.php?tag=${encodeURIComponent(hashtagWithoutHash)}`;
-                messageWithLinks = messageWithLinks.replace(match, `<a href="${exploreUrl}" class="hashtag explore-link">${match}</a>`);
+                messageWithLinks = messageWithLinks.replace(match, `<a href="${exploreUrl}" class="hashtag-link">${match}</a>`);
             } else if (match.startsWith("@")) {
                 // Nom d'utilisateur
                 const usernameWithoutAt = match.substr(1); // Supprimer le préfixe '@'

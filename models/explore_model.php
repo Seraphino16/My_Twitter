@@ -57,8 +57,10 @@ class ExploreModel {
     }
 
     public function selectTweetsWithHashtag($hashtag) {
-        $query = 'SELECT tweet.* FROM tweet
+        $query = 'SELECT tweet.*, users.* 
+                  FROM tweet
                   JOIN hashtag ON tweet.id = hashtag.tweet_id
+                  JOIN users ON tweet.user_id = users.id
                   LEFT JOIN tweet_comment ON tweet.id = tweet_comment.id
                   LEFT JOIN retweets ON tweet.id = retweets.references_tweet_id
                   WHERE hashtag.name = :hashtag

@@ -10,8 +10,6 @@ if (userDataJSON) {
     const username = user.username;
     const id = user.id;
 
-    console.log(fullname);
-
     const urlParams = new URLSearchParams(window.location.search);
     let selectedUsername = urlParams.get('username');
 
