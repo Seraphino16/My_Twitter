@@ -1,8 +1,14 @@
 $(document).ready(function() {
 
-    const fullname = sessionStorage.getItem('fullname');
-    const username = sessionStorage.getItem('username');
-    const id = sessionStorage.getItem('id');
+    
+const userDataJSON = getCookie('user_data');
+    
+if (userDataJSON) {
+    console.log("Contenu du cookie : ", userDataJSON);
+    const user = JSON.parse(userDataJSON);
+    const firstname = user.firstname;
+    const username = user.username;
+    const id = user.id;
 
     console.log(fullname);
 
@@ -20,7 +26,7 @@ $(document).ready(function() {
         $("#edit-profile-btn").remove();
     }
     
-    if (fullname && username) {
+    if (firstname && username) {
     
         getUserInfos(id, selectedUsername);
         getUserFollowers(id, selectedUsername);
@@ -41,10 +47,12 @@ $(document).ready(function() {
             unfollow(id, username, selectedUsername);
         })
 
-        $('#sessionFullname').html('<strong>' + fullname + '</strong>');
+        $('#sessionFullname').html('<strong>' + firstname + '</strong>');
 
         $('#sessionPseudo').text("@" + username);
         
+    }
+
     }
 });
 
@@ -332,4 +340,15 @@ function unfollow (id, currentUser, userToUnfollow) {
             }
         }
     })
+}
+
+function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+        const [cookieName, cookieValue] = cookie.split('=');
+        if (cookieName.trim() === name) {
+            return decodeURIComponent(cookieValue);
+        }
+    }
+    return null;
 }

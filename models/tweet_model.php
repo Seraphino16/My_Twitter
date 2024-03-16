@@ -1,6 +1,5 @@
 <?php
-include '../config/database.php';
-
+include '../config/config.php';
 
 class userModel {
     public $id;
@@ -48,23 +47,22 @@ class userModel {
         }
     }
 
-    public static function searchUsers($searchText){
+    public static function searchUsersByUsername($query) {
         global $db;
 
-        $searchText = '%' . $searchText . '%';
-
         try {
-            $query = "SELECT firstname, lastname, username FROM users WHERE firstname LIKE :searchText OR lastname LIKE :searchText OR username LIKE :searchText";
-            $stmt = $db->prepare($query);
-            $stmt->bindParam(':searchText', $searchText);
+            $query = "%$query%";
+            $sql = "SELECT id, firstname, lastname, username FROM users WHERE username LIKE :query";
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':query', $query, PDO::PARAM_STR);
             $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            return $result;
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $results;
         } catch (PDOException $e) {
             return null;
         }
-
     }
 }
 

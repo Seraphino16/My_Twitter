@@ -20,7 +20,7 @@ $(document).ready(function() {
 
         console.log('click');
 
-        const searchTerm = $('#searchInput').val().trim();
+        const searchTerm = $('.search-input').val().trim();
 
         if (searchTerm.length > 0) {
             if (searchTerm.startsWith('#')) {
@@ -33,7 +33,14 @@ $(document).ready(function() {
             $('#resultsContent').empty();
         }
     });
-}
+}   
+
+        $(document).on('click', '.hashtag-link', function(event) {
+
+            event.preventDefault();
+            const hashtag = $(this).text();
+            searchTweet(hashtag);
+        });
 
 });
 
@@ -124,6 +131,50 @@ function searchHashtags(searchTerm) {
                 $('#resultsContent').append(hashtagResult);
 
             });
+        },
+    });
+}
+
+function searchTweet(hashtag) {
+    $.ajax({
+        type: 'POST',
+        url: '../controllers/explore_controller.php',
+        data: { hashtag: hashtag },
+        dataType: 'json',
+        success: function(tweets) {
+
+            console.log();
+
+            $('#resultsContent').empty();
+
+            tweets.forEach(tweet => {
+                const tweetResult = `
+                    <div class="tweet">
+                    <div class="tweet-header">
+                        <img src="../public/img/profile.png" alt="profile photo" class="tweet-profile">
+                        <div class="tweet-text">
+                            <div class="tweet-author">${tweet.name}</div>
+                            <div class="tweet-author-handle">@$ · </div>
+                        </div>
+                    </div>
+                    <div class="tweet-message"></div>
+                    <div class="tweet-stats">
+                        <div><i class="far fa-comment"></i> 0</div>
+                        <div><i class="fas fa-retweet"></i> 0</div>
+                        <div><i class="far fa-heart"></i> 0</div>
+                    </div>
+                </div>
+                `;
+                $('#resultsContent').append(tweetResult);
+            });
+
+            const newUrl = window.location.origin + window.location.pathname + '?tag=' + encodeURIComponent(hashtag);
+            history.pushState({ path: newUrl }, '', newUrl);
+        },
+
+        error: function(xhr, status, error) {
+            
+        
         }
     });
 }

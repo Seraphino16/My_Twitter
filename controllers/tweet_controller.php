@@ -3,6 +3,7 @@ session_start();
 require_once('../config/database.php');
 require_once('../models/tweet_model.php');
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer l'ID de l'utilisateur connecté depuis la session
     $userId = 16;
