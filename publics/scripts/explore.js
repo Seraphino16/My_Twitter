@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-    
     const userDataJSON = getCookie('user_data');
 
     console.log('cookie :' + userDataJSON);
@@ -12,6 +11,7 @@ $(document).ready(function() {
         const id = user.id;
 
     if (firstname && username) {
+        
 
         $('.name').html('<strong>' + firstname + '</strong>');
         $('.username').text('@' + username);
@@ -28,6 +28,7 @@ $(document).ready(function() {
                 searchHashtags(searchTerm);
             } else {
                 searchUsers(searchTerm);
+                
             }
         } else {
             $('#resultsContent').empty();
@@ -75,7 +76,7 @@ function searchUsers(searchTerm) {
                     <p class="bio"></p>
                 </div>
                     <div>
-                    <a href="profil.php?username=${encodeURIComponent(user.username)}" class="btn btn-primary">Voir le profil</a>   
+                    <a href="profil.php?username=${encodeURIComponent(user.username)}" class="btn btn-primary">Voir le profil</a>
                     </div>
                 </div>`
                 $('#resultsContent').append(userResult);
@@ -83,8 +84,9 @@ function searchUsers(searchTerm) {
 
             if(user.bio !== null && user.bio.length !== 0) {
                 $(".bio").text(user.bio);
+                
             }
-            
+
         });
             
         }, 

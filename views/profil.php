@@ -79,8 +79,8 @@
                         <div class="grid-user">
                             <div><img src="../publics/img/profile.png" alt="user" class="img-user"/></div>
                             <div>
-                                <p class="name fullname"><strong>Name</strong></p>
-                                <p class="username pseudo">@Pseudo</p>
+                                <p class="name" id="sessionFullname"><strong>Name</strong></p>
+                                <p class="username" id="sessionPseudo">@Pseudo</p>
                             </div>
                             <div class="mt-arrow">
                                 <!--
@@ -130,7 +130,9 @@
                             </div>
                             <div class="row justify-content-between">
                                 <img class="home-img-user" src="../publics/img/profile.png" alt="">
-                                <button type="button" class="edit-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button id="unfollow-btn" type="button" class="edit-btn">Unfollow</button>
+                                <button id="follow-btn" type="button" class="edit-btn">Follow</button>
+                                <button id="edit-profile-btn" type="button" class="edit-btn" data-bs-toggle="modal" data-bs-target="#update-profile-modal">
                                     Edit Profile
                                   </button>
                                   
@@ -164,11 +166,11 @@
                             </div>
                             <div class="row home-follow ml-2 mt-1">
                                 <div class="col-md-3">
-                                    <div class="count-following-i" data-follow = "" >
+                                    <div class="count-following-i" data-follow = "" data-bs-toggle="modal" data-bs-target="#following-modal">
                                         <span class="home-follow-count count-following">0</span> Following</div>
                                 </div>
                                 <div class="col-md-3">
-                                    <div class="count-followers-i" data-follow = "" >
+                                    <div class="count-followers-i" data-follow = "" data-bs-toggle="modal" data-bs-target="#followers-modal" >
                                         <span class="home-follow-count count-followers">0</span> Followers</div>
                                 </div>
                             </div>
@@ -211,12 +213,12 @@
         </div>
 
 
-        <!-- modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- Modal for profile update -->
+        <div class="modal fade" id="update-profile-modal" tabindex="-1" aria-labelledby="update-profile-label" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Edit your profile</h1>
+                  <h1 class="modal-title fs-5" id="update-profile-label">Edit your profile</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -245,7 +247,46 @@
                 </div>
               </div>
             </div>
-          </div>
+        </div>
+
+
+        <!-- Modal following-->
+        <div class="modal fade" id="following-modal" tabindex="-1" aria-labelledby="following-modal-label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="following-modal-label">You follow: </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <!-- Modal followers-->
+         <div class="modal fade" id="followers-modal" tabindex="-1" aria-labelledby="followers-modal-label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="followers-modal-label">You are followed by: </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
 
         <script src="../publics/scripts/colorMode.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
