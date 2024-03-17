@@ -79,23 +79,27 @@ function searchUsers(searchTerm) {
             $('#resultsContent').empty();
 
             response.forEach(user => {
-                const userResult =  `<div class="tweet">
-                <div class="tweet-header">
-                <img src="../publics/img/profile.png" alt="profile photo" class="tweet-profile">
-                <div class="tweet-text">
-                    <div>
-                    <p class="name"><strong>${user.firstname}</strong></p>
-                     <p class="username">@${user.username}</p>
+                const userResult =  ` <div class="tweet">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="tweet-header">
+                            <img src="../publics/img/profile.png" alt="profile photo" class="tweet-profile">
+                            <div class="tweet-text">
+                                <div>
+                                    <p class="name"><strong>${user.firstname}</strong></p>
+                                    <p class="username">@${user.username}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="home-title">
+                            <p class="bio"></p>
+                        </div>
+                    </div>
+                    <div class="col-3 d-flex justify-content-end align-items-center">
+                        <a href="profil.php?username=${encodeURIComponent(user.username)}" class="button-profil rounded-pill">Voir le profil</a>
                     </div>
                 </div>
-            </div>
-                <div class="home-title">
-                    <p class="bio"></p>
-                </div>
-                    <div>
-                    <a href="profil.php?username=${encodeURIComponent(user.username)}" class="btn btn-primary">Voir le profil</a>
-                    </div>
-                </div>`
+            </div>`
                 $('#resultsContent').append(userResult);
 
 

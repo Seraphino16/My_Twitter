@@ -87,9 +87,9 @@ body.theme-sombre a, body.theme-sombre .wrapper-left-elements a {
 }
 */
 
-#all a:hover, .logoutLink:hover {
+/*#all a:hover, .logoutLink:hover {
     color: var(--color-twitter-blue);
-}
+}*/
 
 /* Boutons */
 .button-twittear {
@@ -99,6 +99,15 @@ body.theme-sombre a, body.theme-sombre .wrapper-left-elements a {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.button-profil {
+    background-color: var(--color-twitter-blue);
+    color: var(--button-text-color-light);
+    text-decoration: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 body.theme-sombre .button-twittear {
