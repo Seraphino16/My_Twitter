@@ -181,13 +181,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="true">Tweets</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="" role="tab" aria-controls="profile" aria-selected="false">Media</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="" role="tab" aria-controls="contact" aria-selected="false">Likes</a>
-                                </li>
-                            </ul>
+                             
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"></div>
                                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"></div>
@@ -294,6 +288,7 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="../publics/scripts/profil.js"></script>
         <script src="../publics/scripts/logout.js"></script>
+        <!-- <script src="../publics/scripts/profileTweets.js"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>

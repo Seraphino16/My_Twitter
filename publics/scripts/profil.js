@@ -51,7 +51,7 @@ if (userDataJSON) {
             unfollow(id, username, selectedUsername);
         })
 
-        $('#sessionFullname').html('<strong>' + fullname + '</strong>');
+        $('#sessionFullname').html('<strong>' + firstname + '</strong>');
 
         $('#sessionPseudo').text("@" + username);
         
