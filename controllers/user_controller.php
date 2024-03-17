@@ -2,6 +2,7 @@
 
 
 include("../models/user_model.php");
+
 if(isset($_POST["id"])) {
     $id_user = $_POST["id"];
 } else {
@@ -13,7 +14,6 @@ if(isset($_POST["username"])) {
     $username = $_POST["username"];
 } else {
     echo json_encode("Username not found");
-    echo json_encode($_POST);
     exit;
 }
 

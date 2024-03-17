@@ -14,8 +14,6 @@ class User
     {
         $this->db = $db;
         $this->username= $username;
-        // $this->id_user = $id;
-        // $this->$username = $username
         $this->getUserId();
     }
 

@@ -9,6 +9,7 @@ if (userDataJSON) {
     const firstname = user.firstname;
     const username = user.username;
     const id = user.id;
+    const fullname = firstname + user.lastname;
 
     const urlParams = new URLSearchParams(window.location.search);
     let selectedUsername = urlParams.get('username');
@@ -82,7 +83,6 @@ function getUserInfos(id, selectedUsername) {
                 $(".pseudo").text("@" + user.username);
                 $(".fullname").text(user.firstname);
 
-                
                 if(user.bio !== null && user.bio.length !== 0) {
                     $(".bio").text(user.bio);
                 }
@@ -232,7 +232,6 @@ function displayList(users) {
 
     users.forEach(user => {
 
-        console.log(user)
         let li = document.createElement("div");
         let link = document.createElement("a");
 
@@ -262,11 +261,6 @@ function displayList(users) {
             </div>
             </div>
             </div>`
-                
-            // if(user.bio !== null && user.bio.length !== 0) {
-            //     $(".bio").text(user.bio);
-                
-            // }
 
 
         $(link).attr('href', profileURL).html(userResult);
@@ -309,7 +303,6 @@ function updateProfile(id, selectedUsername) {
         url: "../../controllers/user_controller.php",
         method: "POST",
         data: formData,
-        // dataType: "json",
         success: function(data) {
             location.reload()
         }
@@ -407,9 +400,7 @@ function getUserTweets (id, username) {
         },
         success: function (data) {
 
-            data = JSON.parse(data);
-            console.log(data);
-           
+            data = JSON.parse(data);           
             
             if(data.tweets.length === 0) {
                 const emptyTweetTxt = `<p class='empty-tweets'>@${username} hasn't tweeted yet !</div>`;
