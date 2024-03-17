@@ -1,24 +1,3 @@
-// Compter le nombre de caractères dans le champ de texte
-function characterCount() {
-    const textField = document.querySelector('.text-whathappen');
-    const counter = document.getElementById('count');
-
-    textField.addEventListener('input', function() {
-        const textLength = textField.value.length;
-
-        const remainingCharacters = 140 - textLength;
-        counter.textContent = remainingCharacters;
-
-        if (remainingCharacters < 0) {
-            counter.style.color = 'red';
-            textField.style.color = 'red';
-        } else {
-            counter.style.color = '';
-            textField.style.color = '';
-        }
-    });
-}
-
 $(document).ready(function() {
     characterCount();
     const initialCount = parseInt($('#count').text());
@@ -128,81 +107,81 @@ $(document).ready(function() {
         likeCount.text(currentCount);
     });
 
-        // Gestionnaire d'événements pour le clic sur l'icône de retweet
-        $('.tweet-container').on('click', '.fa-retweet', function() {
-            // Déclarer et initialiser le tableau pour stocker les IDs des tweets retweetés par l'utilisateur
-            let retweetedTweets = [];
-    
-            // Récupérer l'ID du tweet
-            const tweetId = $(this).closest('.tweet').data('tweet-id');
-    
-            // Vérifier si l'utilisateur a déjà retweeté ce tweet
-            if (retweetedTweets.includes(tweetId)) {
-                alert("Vous avez déjà retweeté ce tweet !");
-                return; // Arrêter l'exécution de la fonction si le tweet a déjà été retweeté
-            }
-    
-            // Republier le tweet
-            const originalTweet = $(this).closest('.tweet');
-            const tweetClone = originalTweet.clone(); // Créer une copie complète du tweet
-    
-            // Récupérer le nom d'utilisateur de l'utilisateur connecté
-            const username = $('#username').text().substring(1); // Supprimer le '@'
-    
-            // Modifier le message pour indiquer que c'est un retweet avec le nom d'utilisateur
-            const retweetMessage = $(`<div class="retweet-message"><i class="fas fa-retweet"></i> @${username} a retweeté</div>`);
-            tweetClone.find('.tweet-header').before(retweetMessage);
-    
-            // Ajouter la copie du tweet à la liste des tweets
-            $('.tweet-container').prepend(tweetClone);
-    
-            // Ajouter l'ID du tweet à la liste des tweets retweetés par l'utilisateur
-            retweetedTweets.push(tweetId);
-    
-            // Incrémenter le compteur de retweets sur le tweet d'origine et sur la copie du tweet
-            const retweetCount = originalTweet.find('.retweet-count');
-            let currentCount = parseInt(retweetCount.text());
-            currentCount++;
-            retweetCount.text(currentCount);
-    
-            const retweetCountClone = tweetClone.find('.retweet-count');
-            retweetCountClone.text(currentCount);
-    
-            // Mettre à jour l'icône de retweet pour qu'elle soit remplie et de couleur verte sur le tweet d'origine et sur la copie du tweet
-            originalTweet.find('.fa-retweet').removeClass('far').addClass('fas').css('color', 'var(--color-twitter-green)');
-            tweetClone.find('.fa-retweet').removeClass('far').addClass('fas').css('color', 'var(--color-twitter-green)');
-            
-            const userDataJSON = getCookie('user_data');
-            const user = JSON.parse(userDataJSON);
-            const id = user.id;
+    // Gestionnaire d'événements pour le clic sur l'icône de retweet
+    $('.tweet-container').on('click', '.fa-retweet', function() {
+        // Déclarer et initialiser le tableau pour stocker les IDs des tweets retweetés par l'utilisateur
+        let retweetedTweets = [];
 
-            // Appeler le contrôleur via AJAX pour enregistrer le retweet
-            $.ajax({
-                url: '../controllers/tweet_controller.php',
-                type: 'POST',
-                dataType: 'json',
-                data: { retweet: true, tweet_id: tweetId, id: id },
-                success: function(response) {
-                    if (response.success) {
-                        console.log("Retweet enregistré avec succès !");
-                    } else {
-                        console.error(response.error);
-                        
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                    console.log('Erreur AJAX : ');
+        // Récupérer l'ID du tweet
+        const tweetId = $(this).closest('.tweet').data('tweet-id');
+
+        // Vérifier si l'utilisateur a déjà retweeté ce tweet
+        if (retweetedTweets.includes(tweetId)) {
+            alert("Vous avez déjà retweeté ce tweet !");
+            return; // Arrêter l'exécution de la fonction si le tweet a déjà été retweeté
+        }
+
+        // Republier le tweet
+        const originalTweet = $(this).closest('.tweet');
+        const tweetClone = originalTweet.clone(); // Créer une copie complète du tweet
+
+        // Récupérer le nom d'utilisateur de l'utilisateur connecté
+        const username = $('#username').text().substring(1); // Supprimer le '@'
+
+        // Modifier le message pour indiquer que c'est un retweet avec le nom d'utilisateur
+        const retweetMessage = $(`<div class="retweet-message"><i class="fas fa-retweet"></i> @${username} a retweeté</div>`);
+        tweetClone.find('.tweet-header').before(retweetMessage);
+
+        // Ajouter la copie du tweet à la liste des tweets
+        $('.tweet-container').prepend(tweetClone);
+
+        // Ajouter l'ID du tweet à la liste des tweets retweetés par l'utilisateur
+        retweetedTweets.push(tweetId);
+
+        // Incrémenter le compteur de retweets sur le tweet d'origine et sur la copie du tweet
+        const retweetCount = originalTweet.find('.retweet-count');
+        let currentCount = parseInt(retweetCount.text());
+        currentCount++;
+        retweetCount.text(currentCount);
+
+        const retweetCountClone = tweetClone.find('.retweet-count');
+        retweetCountClone.text(currentCount);
+
+        // Mettre à jour l'icône de retweet pour qu'elle soit remplie et de couleur verte sur le tweet d'origine et sur la copie du tweet
+        originalTweet.find('.fa-retweet').removeClass('far').addClass('fas').css('color', 'var(--color-twitter-green)');
+        tweetClone.find('.fa-retweet').removeClass('far').addClass('fas').css('color', 'var(--color-twitter-green)');
+
+        const userDataJSON = getCookie('user_data');
+        const user = JSON.parse(userDataJSON);
+        const id = user.id;
+
+
+        // Appeler le contrôleur via AJAX pour enregistrer le retweet
+        $.ajax({
+            url: '../controllers/tweet_controller.php',
+            type: 'POST',
+            dataType: 'json',
+            data: { retweet: true, tweet_id: tweetId, id: id },
+            success: function(response) {
+                if (response.success) {
+                    console.log("Retweet enregistré avec succès !");
+                } else {
+                    console.error(response.error);
+
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                console.log('Erreur AJAX : ');
                 console.log('status: ' + status);
                 console.log('error: ' + error);
                 console.log('responseText: ' + xhr.responseText);
                 alert('Erreur AJAX : ' + status);
-                }
-            });
+            }
         });
-    
-    
+
     });
+});
 
 
 
@@ -267,7 +246,7 @@ function generateTweetHTML(fullname, username, message, date) {
             <div class="tweet-message">${messageWithLinks}</div>
             <div class="tweet-stats">
                 <div><i class="far fa-comment"></i> 0</div>
-                <div><i class="fas fa-retweet"></i> 0</div>
+                <div><i class="fas fa-retweet"></i> <span class="retweet-count"> 0</div>
                 <div><i class="far fa-heart like"></i> <span class="like-count"> 0</span></div>
             </div>
         </div>
@@ -394,4 +373,3 @@ function getCookie(name) {
     }
     return null;
 }
-

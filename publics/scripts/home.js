@@ -98,7 +98,7 @@ function generateTweetHTML(firstname, username, message, date) {
             <div class="tweet-message">${messageWithLinks}</div>
             <div class="tweet-stats">
                 <div><i class="far fa-comment"></i> 0</div>
-                <div><i class="fas fa-retweet"></i> 0</div>
+                <div><i class="fas fa-retweet"></i> <span class="retweet-count"> 0</div>
                 <div><i class="far fa-heart like"></i> <span class="like-count"> 0</span></div>
             </div>
         </div>
