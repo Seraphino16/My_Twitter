@@ -277,6 +277,11 @@ function displayList(users) {
         ul.appendChild(link);
     });
 
+    if(users.length === 0) {
+        const p = "<p class='empty-tweets'>Nothing to see there</p>";
+        ul.innerHTML = p;
+    }
+
 
     return ul;
 }
