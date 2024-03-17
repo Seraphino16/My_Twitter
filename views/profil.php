@@ -122,7 +122,6 @@
                                 </div>
                                 <div class="col-xs-10">
                                     <span class="home-name fullname">Name</span>
-                                    <p class="home-tweets-num">NB Tweets</p>
                                 </div>
                             </div>
                             <div class="row mt-5">
