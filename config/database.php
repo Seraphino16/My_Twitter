@@ -2,7 +2,7 @@
 
 $DB_HOST = 'localhost';
 $DB_NAME = 'twitter';
-$DB_USER = 'emiroolie';
+$DB_USER = 'emilie';
 $DB_PASSWORD = '1234password';
 
 try {
