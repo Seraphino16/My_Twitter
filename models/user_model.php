@@ -124,27 +124,57 @@ class User
         return $getTweets->fetchAll();
     }
 
-    public function updateProfile ($firstname, $bio, $location, $url)
+    public function updateProfile($firstname, $bio, $location, $url)
     {
-        $query = "UPDATE users
-        JOIN users_preferences
-            ON users.id = users_preferences.user_id
-        SET
-            users.firstname = :firstname,
-            users_preferences.bio = :bio,
-            users_preferences.localisation = :location,
-            users_preferences.website = :url
-        WHERE users.id = :id_user";
+        
+        $queryCheckPreferences = "SELECT COUNT(*) AS count FROM users_preferences 
+                                    WHERE user_id = :id_user";
 
-        $updateProfile = $this->db->prepare($query);
-        $updateProfile->bindParam(":firstname", $firstname);
-        $updateProfile->bindParam(":bio", $bio);
-        $updateProfile->bindParam(":location", $location);
-        $updateProfile->bindParam(":url", $url);
-        $updateProfile->bindParam(":id_user", $this->id_user);
-
-        return $updateProfile->execute();
+        $checkPreferencesStatement = $this->db->prepare($queryCheckPreferences);
+        $checkPreferencesStatement->bindParam(":id_user", $this->id_user);
+        $checkPreferencesStatement->execute();
+        $count = $checkPreferencesStatement->fetch(PDO::FETCH_ASSOC)['count'];
+    
+        if ($count > 0) {
+            
+            $queryUpdatePreferences = "UPDATE users_preferences 
+                                        SET bio = :bio, localisation = :location, 
+                                            website = :url WHERE user_id = :id_user";
+            $updatePreferencesStatement = $this->db->prepare($queryUpdatePreferences);
+        } else {
+           
+            $queryInsertPreferences = "INSERT INTO users_preferences (user_id, bio, localisation, website) 
+                                        VALUES (:id_user, :bio, :location, :url)";
+            $insertPreferencesStatement = $this->db->prepare($queryInsertPreferences);
+        }
+    
+      
+        $queryUpdateUser = "UPDATE users SET firstname = :firstname WHERE id = :id_user";
+        $updateUserStatement = $this->db->prepare($queryUpdateUser);
+    
+     
+        $updateUserStatement->bindParam(":firstname", $firstname);
+        $updateUserStatement->bindParam(":id_user", $this->id_user);
+    
+        if ($count > 0) {
+            $updatePreferencesStatement->bindParam(":bio", $bio);
+            $updatePreferencesStatement->bindParam(":location", $location);
+            $updatePreferencesStatement->bindParam(":url", $url);
+            $updatePreferencesStatement->bindParam(":id_user", $this->id_user);
+            $updatePreferencesStatement->execute();
+        } else {
+            $insertPreferencesStatement->bindParam(":bio", $bio);
+            $insertPreferencesStatement->bindParam(":location", $location);
+            $insertPreferencesStatement->bindParam(":url", $url);
+            $insertPreferencesStatement->bindParam(":id_user", $this->id_user);
+            $insertPreferencesStatement->execute();
+        }
+    
+        $updateUserStatement->execute();
+    
+        return true;
     }
+    
 
     public function follow ($usernameToFollow)
     {
