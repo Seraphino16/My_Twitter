@@ -29,6 +29,7 @@ if (userDataJSON) {
         getUserInfos(id, selectedUsername);
         getUserFollowers(id, selectedUsername);
         getUserFollows(id, selectedUsername);
+        getUserTweets(id, selectedUsername);
 
         getFollowsList(id, selectedUsername);
         getFollowersList(id, selectedUsername, username);
@@ -350,4 +351,99 @@ function getCookie(name) {
         }
     }
     return null;
+}
+
+
+function getUserTweets (id, username) {
+
+    $.ajax({
+        url: "../controllers/user_controller.php",
+        method: "POST",
+        data: {
+            id: id,
+            username: username,
+            action: "oneUser",
+        },
+        success: function (data) {
+            
+            if(data.length === 0) {
+                const emptyTweetTxt = `<p class='empty-tweets'>@${username} hasn't tweeted yet !</div>`;
+                $(".tweet-container").prepend(emptyTweetTxt);
+            } else {
+                data.forEach(tweet => {
+                const tweetHTML = generateTweetHTML(tweet.firstname, tweet.username, tweet.message, tweet.date);
+                $('.tweet-container').prepend(tweetHTML);
+            });
+        }
+            
+        }  
+    });
+}
+
+function generateTweetHTML(fullname, username, message, date) {
+    // Analyser le texte pour détecter les hashtags et les noms d'utilisateur
+    const hashtagsAndUsernames = message.match(/(?:#\w+|@\w+)\b/g) || [];
+    let messageWithLinks = message;
+
+// Si des hashtags ou des noms d'utilisateur sont trouvés, les remplacer par des liens
+    if (hashtagsAndUsernames !== null) {
+        hashtagsAndUsernames.forEach(function(match) {
+            if (match.startsWith("#")) {
+                // Hashtag
+                messageWithLinks = messageWithLinks.replace(match, `<a href="hashtag.php?tag=${encodeURIComponent(match.substr(1))}" class="hashtag">${match}</a>`);
+            } else if (match.startsWith("@")) {
+                // Nom d'utilisateur
+                messageWithLinks = messageWithLinks.replace(match, `<a href="profil.php?username=${encodeURIComponent(match.substr(1))}" class="arobase">${match}</a>`);
+            }
+        });
+    }
+
+    const displayTime = calculateTimePassed(date);
+
+    const html = `
+        <div class="tweet">
+            <div class="tweet-header">
+                <img src="../publics/img/profile.png" alt="profile photo" class="tweet-profile">
+                <div class="tweet-text">
+                    <div class="tweet-author">${fullname}</div>
+                    <div class="tweet-author-handle">@${username} · ${displayTime}</div>
+                </div>
+            </div>
+            <div class="tweet-message">${messageWithLinks}</div>
+            <div class="tweet-stats">
+                <div><i class="far fa-comment"></i> 0</div>
+                <div><i class="fas fa-retweet"></i> 0</div>
+                <div><i class="far fa-heart"></i> 0</div>
+            </div>
+        </div>
+    `;
+    return html;
+}
+
+function calculateTimePassed(date){
+
+    const now = new Date();
+    const tweetDate = new Date(date);
+    const timeDiff = now - tweetDate;
+
+    // Conversion de la différence en secondes
+    const secondsDiff = Math.floor(timeDiff / 1000);
+
+    // Convertir les secondes en une unité de temps appropriée (minutes, heures, jours, etc.)
+    let displayTime;
+    if (secondsDiff < 60) {
+        displayTime = secondsDiff + 's'; // Secondes
+    } else if (secondsDiff < 3600) {
+        displayTime = Math.floor(secondsDiff / 60) + 'm'; // Minutes
+    } else if (secondsDiff < 86400) {
+        displayTime = Math.floor(secondsDiff / 3600) + 'h'; // Heures
+    } else if (secondsDiff < 2592000) {
+        displayTime = Math.floor(secondsDiff / 86400) + 'j'; // Jours
+    } else if (secondsDiff < 31536000) {
+        displayTime = Math.floor(secondsDiff / 2592000) + 'mo'; // Mois
+    } else {
+        displayTime = Math.floor(secondsDiff / 31536000) + 'a'; // Années
+    }
+
+    return displayTime;
 }

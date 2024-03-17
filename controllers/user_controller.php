@@ -86,6 +86,14 @@ if(isset($_POST["action"])) {
             $response["tweets"] = $tweets;
             
             break;
+         case "oneUser":
+            try {
+                $tweets = $getTweets->getOneUserTweets($user);
+                echo json_encode($tweets);
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+            break;
         default:
             $response['status'] = 'error';
             $response['message'] = 'Action non valide';

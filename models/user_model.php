@@ -225,6 +225,22 @@ class User
         return $stmt->execute();
     }
 
+        public function getOneUserTweets ($id_user)
+        {
+            $query = "SELECT tweet.*, users.*
+                    FROM tweet
+                    JOIN users
+                    ON tweet.user_id = users.id
+                    WHERE tweet.user_id = :id";
+
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(":id", $user->id_user);
+            $stmt->execute();
+            
+            return $stmt->fetchAll();
+        }
+
+
        // Récupération des tweet de l'utilisateur et de ses followings
        public function getTweetsByUserAndFollowings($id_user) {
           
