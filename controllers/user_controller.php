@@ -80,7 +80,12 @@ if(isset($_POST["action"])) {
             $isUnfollow = $user->unfollow($userToUnfollow);
             $response["isUnfollow"] = $isUnfollow;
             break;
+        case "getTweetsForHome":
             
+            $tweets = $user->getTweetsByUserAndFollowings($id_user);
+            $response["tweets"] = $tweets;
+            
+            break;
         default:
             $response['status'] = 'error';
             $response['message'] = 'Action non valide';

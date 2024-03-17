@@ -2,6 +2,9 @@
 
 include("../config/database.php");
 
+ini_set('display_errors', 1);
+error_reporting(E_ERROR);
+
 class User
 {
 
@@ -221,4 +224,25 @@ class User
 
         return $stmt->execute();
     }
+
+       // Récupération des tweet de l'utilisateur et de ses followings
+       public function getTweetsByUserAndFollowings($id_user) {
+          
+            $query = "SELECT tweet.id, tweet.user_id, tweet.isDeleted, tweet.message, tweet.created_at,
+                                users.firstname, users.username
+                        FROM tweet
+                        JOIN users ON tweet.user_id = users.id
+                        WHERE tweet.user_id = :user_id 
+                            OR tweet.user_id IN (SELECT following_id 
+                        FROM followers WHERE follower_id = :user_id)
+                        ORDER BY tweet.created_at DESC";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':user_id', $id_user);
+            $stmt->execute();
+            $tweets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            return $tweets;
+        
+    }
 }
+
