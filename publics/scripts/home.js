@@ -3,7 +3,6 @@ $(document).ready(function() {
     
     const userDataJSON = getCookie('user_data');
 
-    console.log('cookie :' + userDataJSON);
 
     if (userDataJSON) {
         const user = JSON.parse(userDataJSON);
@@ -53,7 +52,6 @@ function loadTweetsAndDisplay(id, username) {
             },
             error: function(xhr, status, error) {
                
-                error.log('error: ' + error);
                
             }
         });

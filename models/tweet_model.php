@@ -1,6 +1,7 @@
 <?php
 include '../config/config.php';
 
+// USER MODEL AVEC TWEET MODEL
 class userModel {
     public $id;
     public $genre;

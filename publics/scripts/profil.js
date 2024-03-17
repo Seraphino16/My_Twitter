@@ -1,10 +1,14 @@
 $(document).ready(function() {
 
-    const fullname = sessionStorage.getItem('fullname');
-    const username = sessionStorage.getItem('username');
-    const id = sessionStorage.getItem('id');
-
-    console.log(fullname);
+    
+const userDataJSON = getCookie('user_data');
+    
+if (userDataJSON) {
+    console.log("Contenu du cookie : ", userDataJSON);
+    const user = JSON.parse(userDataJSON);
+    const firstname = user.firstname;
+    const username = user.username;
+    const id = user.id;
 
     const urlParams = new URLSearchParams(window.location.search);
     let selectedUsername = urlParams.get('username');
@@ -74,7 +78,7 @@ function getUserInfos(id, selectedUsername) {
                 $(".pseudo").text("@" + user.username);
                 $(".fullname").text(user.firstname);
 
-                console.log(response)
+            
                 if(user.bio !== null && user.bio.length !== 0) {
                     $(".bio").text(user.bio);
                 }
@@ -108,13 +112,7 @@ function getUserInfos(id, selectedUsername) {
                 console.error('Erreur lors de la récupération des informations supplémentaires.');
             }
         },
-        error: function(xhr, status, error) {
-                console.log('Erreur AJAX : ');
-                console.log('status: ' + status);
-                console.log('error: ' + error);
-                console.log('responseText: ' + xhr.responseText);
-                alert('Erreur AJAX : ' + status);
-        }
+      
 
         
     });

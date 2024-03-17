@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-                <a href="homeView.php">
+                <a href="home.php">
                     <div class="grid-sidebar">
                         <div class="icon-sidebar-align">
                             <i class="bi bi-house-fill"></i>
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a href="explore.php">
                     <div class="grid-sidebar bg-active">
                         <div class="icon-sidebar-align">
                             <i class="bi bi-hash"></i>
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a href="profil.php">
                     <div class="grid-sidebar">
                         <div class="icon-sidebar-align">
                             <i class="bi bi-person-fill"></i>

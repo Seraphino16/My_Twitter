@@ -19,11 +19,7 @@ function userLogout() {
         },
         error: function(xhr, status, error) {
 
-            console.log('Erreur AJAX : ');
-            console.log('status: ' + status);
-            console.log('error: ' + error);
-            console.log('responseText: ' + xhr.responseText);
-            console.log('Erreur AJAX : ' + status);
+            
         }
 
     });
@@ -34,8 +30,7 @@ $(document).ready(function() {
     $('#logout').click(function(event) {
         event.preventDefault();
 
-        console.log('click');
-      
+       
         userLogout();
        
     });

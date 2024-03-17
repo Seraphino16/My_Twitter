@@ -22,7 +22,6 @@ function loginUser() {
 
                     const user = JSON.parse(response.user);
 
-                    console.log(response.user);
                     const username = userData.username;
 
                     const fullname = user.firstname + ' ' + user.lastname; 
@@ -35,17 +34,13 @@ function loginUser() {
                     window.location.href = `../views/home.php?username=${encodeURIComponent(username)}`;
                     
                 } else {
-                    alert('Erreur lors de l\'inscription : ' + response.message);
+                    alert('Erreur lors de la connexion : ' + response.message);
                 }
             },
 
             error: function(xhr, status, error) {
 
-                console.log('Erreur AJAX : ');
-                console.log('status: ' + status);
-                console.log('error: ' + error);
-                console.log('responseText: ' + xhr.responseText);
-                alert('Erreur AJAX : ' + status);
+              
             }
 
         });

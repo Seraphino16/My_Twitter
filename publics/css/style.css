@@ -56,6 +56,10 @@ body.theme-sombre {
     color: var(--text-color-dark);
 }
 
+.bg-index {
+    background-color: var(--color-twitter-blue);
+}
+
 .sidebar-left, .grid-sidebar, #all .wrapper-left, #all .grid-sidebar, #all .box-user, #all .grid-user, #all .grid-posts, #all .border-right, #all .grid-toolbar-center, #all .input-group-login, #all .container, #all .part-1, #all .wrapper-right, #all .box-share,
 #all .box-tweet, #all .tweet-container {
     background-color: var(--sidebar-bg-color-light);
@@ -101,7 +105,7 @@ body.theme-sombre a, body.theme-sombre .wrapper-left-elements a {
     cursor: pointer;
 }
 
-.button-profil {
+.button-profil, .button-register {
     background-color: var(--color-twitter-blue);
     color: var(--button-text-color-light);
     text-decoration: none;
@@ -247,7 +251,7 @@ body.theme-sombre .form-control, body.theme-sombre .search-input {
 }
 
 #all .box-user {
-    margin-top: 110%;
+    margin-top: 180%;
     padding: 4%;
 }
 

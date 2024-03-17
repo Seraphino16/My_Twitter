@@ -172,11 +172,7 @@ $(document).ready(function() {
             },
             error: function(xhr, status, error) {
                 console.error(error);
-                console.log('Erreur AJAX : ');
-                console.log('status: ' + status);
-                console.log('error: ' + error);
-                console.log('responseText: ' + xhr.responseText);
-                alert('Erreur AJAX : ' + status);
+                
             }
         });
 

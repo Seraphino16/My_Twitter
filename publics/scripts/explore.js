@@ -2,7 +2,6 @@ $(document).ready(function() {
 
     const userDataJSON = getCookie('user_data');
 
-    console.log('cookie :' + userDataJSON);
 
     if (userDataJSON) {
         const user = JSON.parse(userDataJSON);
@@ -18,7 +17,6 @@ $(document).ready(function() {
 
     $('.search-input').keyup(function () {
 
-        console.log('click');
 
         const searchTerm = $('.search-input').val().trim();
 
@@ -37,7 +35,7 @@ $(document).ready(function() {
 
         const urlParams = new URLSearchParams(window.location.search);
         const hashtagFromUrl = urlParams.get('tag');
-    console.log(hashtagFromUrl);
+  
      
         if (hashtagFromUrl) {
 
@@ -74,7 +72,6 @@ function searchUsers(searchTerm) {
         dataType: 'json',
         success: function(response) {
 
-            console.log(response);
 
             $('#resultsContent').empty();
 
@@ -112,14 +109,9 @@ function searchUsers(searchTerm) {
             
         }, 
 
-
         error: function(xhr, status, error) {
 
-            console.log('Erreur AJAX : ');
-            console.log('status: ' + status);
-            console.log('error: ' + error);
-            console.log('responseText: ' + xhr.responseText);
-            alert('Erreur AJAX : ' + status);
+           
         }
     });
 }
@@ -133,7 +125,6 @@ function searchHashtags(searchTerm) {
         dataType: 'json',
         success: function(response) {
 
-            console.log(response);
 
             $('#resultsContent').empty();
 

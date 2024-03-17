@@ -24,7 +24,7 @@ include '../controller/UserController.php';
                         </div>
                     </div>
 
-                    <a href="homeView.php">
+                    <a href="home.php">
                         <div class="grid-sidebar bg-active">
                             <div class="icon-sidebar-align">
                                 <i class="bi bi-house-fill"></i>
@@ -34,7 +34,7 @@ include '../controller/UserController.php';
                             </div>
                         </div>
                     </a>
-                    <a href="exploreView.php">
+                    <a href="explore.php">
                         <div class="grid-sidebar">
                             <div class="icon-sidebar-align">
                                 <i class="bi bi-hash"></i>
@@ -44,7 +44,7 @@ include '../controller/UserController.php';
                             </div>
                         </div>
                     </a>
-                    <a href="profileView.php">
+                    <a href="profile.php">
                         <div class="grid-sidebar">
                             <div class="icon-sidebar-align">
                                 <i class="bi bi-person-fill"></i>
@@ -54,7 +54,7 @@ include '../controller/UserController.php';
                             </div>
                         </div>
                     </a>
-                    <a href="messageView.php">
+                    <a href="message.php">
                         <div class="grid-sidebar ">
                             <div class="icon-sidebar-align">
                                 <i class="bi bi-envelope-fill"></i>
