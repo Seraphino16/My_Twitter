@@ -227,7 +227,9 @@ class User
 
         public function getOneUserTweets ()
         {
-            $query = "SELECT tweet.*, users.*
+            $query = "SELECT tweet.id, tweet.user_id, tweet.isDeleted,
+                            tweet.message, tweet.created_at,
+                            users.firstname, users.username
                     FROM tweet
                     JOIN users
                     ON tweet.user_id = users.id
@@ -244,8 +246,9 @@ class User
        // Récupération des tweet de l'utilisateur et de ses followings
        public function getTweetsByUserAndFollowings($id_user) {
           
-            $query = "SELECT tweet.id, tweet.user_id, tweet.isDeleted, tweet.message, tweet.created_at,
-                                users.firstname, users.username
+            $query = "SELECT tweet.id, tweet.user_id, tweet.isDeleted, 
+                            tweet.message, tweet.created_at,
+                            users.firstname, users.username
                         FROM tweet
                         JOIN users ON tweet.user_id = users.id
                         WHERE tweet.user_id = :user_id 

@@ -400,14 +400,14 @@ function getUserTweets (id, username) {
         },
         success: function (data) {
 
-            data = JSON.parse(data);           
+            data = JSON.parse(data);      
             
             if(data.tweets.length === 0) {
                 const emptyTweetTxt = `<p class='empty-tweets'>@${username} hasn't tweeted yet !</div>`;
                 $(".tweet-container").prepend(emptyTweetTxt);
             } else {
                 data.tweets.forEach(tweet => {
-                const tweetHTML = generateTweetHTML(tweet.firstname, tweet.username, tweet.message, tweet.date);
+                const tweetHTML = generateTweetHTML(tweet.firstname, tweet.username, tweet.message, tweet.created_at);
                 $('.tweet-container').prepend(tweetHTML);
             });
         }
