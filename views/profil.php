@@ -81,7 +81,7 @@
                             <i class="bi bi-moon-fill"></i>
                         </li>
                     </div>
-
+                    
                     <button class="button-twittear">
                         <strong>Tweeter</strong>
                     </button>
@@ -124,7 +124,6 @@
                                     <span class="home-name fullname">Name</span>
                                     <p class="home-tweets-num">NB Tweets</p>
                                 </div>
-                    
                             </div>
                             <div class="row mt-5">
                                 <div class="col-md-12">
@@ -196,6 +195,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="box-fixed" id="box-fixed">
+                        <div class="box-tweet">
+                            <div class="tweet-container">
+                                <!-- tweets -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="wrapper-right">
@@ -213,10 +219,8 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-
-        <!-- Modal for profile update -->
+            <!-- Modal for profile update -->
         <div class="modal fade" id="update-profile-modal" tabindex="-1" aria-labelledby="update-profile-label" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
               <div class="modal-content">
@@ -258,14 +262,12 @@
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="following-modal-label">You follow: </h1>
+                        <h1 class="modal-title fs-5" id="following-modal-label">Follow: </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                     </div>
                     <div class="modal-footer">
-                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button> -->
                     </div>
                 </div>
             </div>
@@ -276,25 +278,23 @@
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="followers-modal-label">You are followed by: </h1>
+                        <h1 class="modal-title fs-5" id="followers-modal-label">Followed by: </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                     </div>
                     <div class="modal-footer">
-                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button> -->
                     </div>
                 </div>
             </div>
         </div>
-
-        
+        </div>        
 
         <script src="../publics/scripts/colorMode.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="../publics/scripts/profil.js"></script>
         <script src="../publics/scripts/logout.js"></script>
+        <!-- <script src="../publics/scripts/profileTweets.js"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>

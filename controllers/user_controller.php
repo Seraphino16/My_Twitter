@@ -88,8 +88,8 @@ if(isset($_POST["action"])) {
             break;
          case "oneUser":
             try {
-                $tweets = $getTweets->getOneUserTweets($user);
-                echo json_encode($tweets);
+                $tweets = $user->getOneUserTweets();
+                $response["tweets"] = $tweets;
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }

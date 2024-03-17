@@ -1,14 +1,10 @@
 $(document).ready(function() {
 
-    
-const userDataJSON = getCookie('user_data');
-    
-if (userDataJSON) {
-    console.log("Contenu du cookie : ", userDataJSON);
-    const user = JSON.parse(userDataJSON);
-    const firstname = user.firstname;
-    const username = user.username;
-    const id = user.id;
+    const fullname = sessionStorage.getItem('fullname');
+    const username = sessionStorage.getItem('username');
+    const id = sessionStorage.getItem('id');
+
+    console.log(fullname);
 
     const urlParams = new URLSearchParams(window.location.search);
     let selectedUsername = urlParams.get('username');
@@ -24,11 +20,12 @@ if (userDataJSON) {
         $("#edit-profile-btn").remove();
     }
     
-    if (firstname && username) {
+    if (fullname && username) {
     
         getUserInfos(id, selectedUsername);
         getUserFollowers(id, selectedUsername);
         getUserFollows(id, selectedUsername);
+
         getUserTweets(id, selectedUsername);
 
         getFollowsList(id, selectedUsername);
@@ -46,12 +43,10 @@ if (userDataJSON) {
             unfollow(id, username, selectedUsername);
         })
 
-        $('#sessionFullname').html('<strong>' + firstname + '</strong>');
+        $('#sessionFullname').html('<strong>' + fullname + '</strong>');
 
         $('#sessionPseudo').text("@" + username);
         
-    }
-
     }
 });
 
@@ -227,19 +222,55 @@ function getFollowsList(id, selectedUsername) {
 
 function displayList(users) {
 
-    let ul = document.createElement("ul");
+    let ul = document.createElement("div");
 
     users.forEach(user => {
-        let li = document.createElement("li");
+
+        console.log(user)
+        let li = document.createElement("div");
         let link = document.createElement("a");
 
         // Creation de l'url pour le profil sur lequel on clique
         let profileURL = "profil.php?username=" + encodeURIComponent(user.username);
-        $(link).attr('href', profileURL).text(user.username);
 
-        li.appendChild(link);
-        ul.appendChild(li);
+        let bio = (user.bio !== null && user.bio !== undefined) ? user.bio : "";
+
+        const userResult =  `
+        <div id="box-search-explore" class="box-search-explore">
+        <div id="myTabContent" class="tab-content">
+        <div id="resultsContent">
+        <div class="tweet">
+                <div class="tweet-header">
+                <img src="../publics/img/profile.png" alt="profile photo" class="tweet-profile">
+                <div class="tweet-text">
+                    <div>
+                    <p class="name"><strong>${user.firstname}</strong></p>
+                     <p class="username">@${user.username}</p>
+                    </div>
+                </div>
+            </div>
+                <div class="home-title">
+                    <p class="bio">${bio}</p>
+                </div>
+                </div>
+            </div>
+            </div>
+            </div>`
+                
+            // if(user.bio !== null && user.bio.length !== 0) {
+            //     $(".bio").text(user.bio);
+                
+            // }
+
+
+        $(link).attr('href', profileURL).html(userResult);
+        $(link).css("color", "black");
+        $(link).css("text-decoration", "none");
+
+
+        ul.appendChild(link);
     });
+
 
     return ul;
 }
@@ -264,12 +295,11 @@ function updateProfile(id, selectedUsername) {
     }
     
     $.ajax({
-        url: "../controllers/user_controller.php",
+        url: "../../controllers/user_controller.php",
         method: "POST",
         data: formData,
         // dataType: "json",
         success: function(data) {
-            console.log(JSON.stringify(data));
             location.reload()
         }
     });
@@ -365,17 +395,20 @@ function getUserTweets (id, username) {
             action: "oneUser",
         },
         success: function (data) {
+
+            data = JSON.parse(data);
+            console.log(data);
+           
             
-            if(data.length === 0) {
+            if(data.tweets.length === 0) {
                 const emptyTweetTxt = `<p class='empty-tweets'>@${username} hasn't tweeted yet !</div>`;
                 $(".tweet-container").prepend(emptyTweetTxt);
             } else {
-                data.forEach(tweet => {
+                data.tweets.forEach(tweet => {
                 const tweetHTML = generateTweetHTML(tweet.firstname, tweet.username, tweet.message, tweet.date);
                 $('.tweet-container').prepend(tweetHTML);
             });
         }
-            
         }  
     });
 }

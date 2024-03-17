@@ -110,6 +110,10 @@ body.theme-sombre a, body.theme-sombre .wrapper-left-elements a {
     font-weight: bold;
 }
 
+#unfollow-btn {
+    color: #e0544a;
+}
+
 body.theme-sombre .button-twittear {
     background-color: var(--button-bg-color-dark);
     color: var(--button-text-color-dark);
@@ -1352,6 +1356,11 @@ body.theme-sombre #whathappen textarea{
     text-decoration: none;
 }
 
+
+.count-following-i:hover, .count-followers-i:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
 
 .notify-count {
     position: absolute;

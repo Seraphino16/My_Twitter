@@ -86,10 +86,12 @@ class User
 
     public function getFollowsList ()
     {
-        $query = "SELECT username
+        $query = "SELECT username, firstname, bio
         FROM users
         JOIN followers
         ON users.id = following_id
+        JOIN users_preferences
+        ON users.id = users_preferences.user_id
         WHERE follower_id = :id_user";
 
         $getFollowsList = $this->db->prepare($query);
@@ -101,10 +103,12 @@ class User
 
     public function  getFollowersList ()
     {
-        $query = "SELECT username
+        $query = "SELECT username, firstname, bio
         FROM users
         JOIN followers
         ON users.id = follower_id
+        JOIN users_preferences
+        ON users.id = users_preferences.user_id
         WHERE following_id = :id_user";
 
         $getFollowersList = $this->db->prepare($query);
@@ -225,7 +229,7 @@ class User
         return $stmt->execute();
     }
 
-        public function getOneUserTweets ($id_user)
+        public function getOneUserTweets ()
         {
             $query = "SELECT tweet.*, users.*
                     FROM tweet
@@ -234,7 +238,7 @@ class User
                     WHERE tweet.user_id = :id";
 
             $stmt = $this->db->prepare($query);
-            $stmt->bindParam(":id", $user->id_user);
+            $stmt->bindParam(":id", $this->id_user);
             $stmt->execute();
             
             return $stmt->fetchAll();
