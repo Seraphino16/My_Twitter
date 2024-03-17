@@ -263,11 +263,12 @@ function updateProfile(id, selectedUsername) {
     }
     
     $.ajax({
-        url: "../../controllers/user_controller.php",
+        url: "../controllers/user_controller.php",
         method: "POST",
         data: formData,
         // dataType: "json",
         success: function(data) {
+            console.log(JSON.stringify(data));
             location.reload()
         }
     });

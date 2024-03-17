@@ -11,6 +11,8 @@
     --color-font-main:          rgb(0, 0, 0);
     --color-font-secondary:     #14171a;
     --color-nav-border:         rgba(0, 0, 0, 0.25);
+    --color-icon-theme-light:   #ffcc00;
+    --color-icon-theme-dark:    #808080;
 
     /* Variables pour le thème clair */
     --background-color-light: #ffffff;
@@ -52,10 +54,6 @@ body.theme-clair {
 body.theme-sombre {
     background-color: var(--background-color-dark);
     color: var(--text-color-dark);
-}
-
-.bg-index {
-    background-color: var(--color-twitter-blue);
 }
 
 .sidebar-left, .grid-sidebar, #all .wrapper-left, #all .grid-sidebar, #all .box-user, #all .grid-user, #all .grid-posts, #all .border-right, #all .grid-toolbar-center, #all .input-group-login, #all .container, #all .part-1, #all .wrapper-right, #all .box-share,
@@ -106,10 +104,6 @@ body.theme-sombre a, body.theme-sombre .wrapper-left-elements a {
 body.theme-sombre .button-twittear {
     background-color: var(--button-bg-color-dark);
     color: var(--button-text-color-dark);
-}
-
-#unfollow-btn {
-    color: #e0544a;
 }
 
 /* Formulaires et Inputs */
@@ -188,6 +182,29 @@ body.theme-sombre .form-control, body.theme-sombre .search-input {
     color: #1DA1F2;
 }
 
+#all .theme {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5%;
+}
+
+#all .nav-item {
+    margin-left: -13%;
+}
+
+#all .theme i {
+    font-size: 20px;
+}
+
+#all .theme .bi-sun-fill {
+    color: var(--color-icon-theme-light);
+}
+
+#all .theme .bi-moon-fill {
+    color: var(--color-icon-theme-dark);
+}
+
 /* BUTTON TWITTEAR */
 #all .button-twittear {
     display: inline-block;
@@ -217,7 +234,7 @@ body.theme-sombre .form-control, body.theme-sombre .search-input {
 }
 
 #all .box-user {
-    margin-top: 125%;
+    margin-top: 110%;
     padding: 4%;
 }
 
@@ -329,13 +346,6 @@ body.theme-sombre .form-control, body.theme-sombre .search-input {
 body.theme-sombre #all .box-home {
     background-color: var(--sidebar-bg-color-dark);
     color: var(--text-color-dark);
-}
-
-#all .theme {
-    margin-top: -15%;
-    padding-right: 50%;
-    padding-top: 3%;
-    margin-left: 235%;
 }
 
 #all .box-home .box-name .col-xs-10 {
@@ -475,6 +485,41 @@ button:focus {
     box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0, rgba(255, 255, 255, 0.8) -6px -2px 16px 0;
 }
 
+#all .hashtag, #all .arobase {
+    color: var(--color-twitter-blue);
+    text-decoration: none;
+}
+
+#all .hashtag:hover, #all .arobase:hover {
+    text-decoration: underline;
+}
+
+#user-suggestions {
+    display: none;
+}
+
+#user-suggestions ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.suggestions {
+    position: absolute;
+    width: 25%;
+    max-height: 20%;
+    overflow-y: auto;
+    background-color: white;
+    z-index: 999;
+    margin: auto 0 0 5%;
+}
+
+#user-suggestions .grid-user {
+    padding: 3%;
+    column-gap: 0;
+}
+
+
 #all .tweet-header {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -538,7 +583,6 @@ button:focus {
     cursor: pointer;
     color: var(--color-twitter-red);
 }
-
 
 /* BOX-SHARE */
 #all .box-share{
@@ -843,7 +887,6 @@ body.theme-sombre #whathappen textarea{
 }
 
 #whathappen .text-whathappen:focus {
-
     outline: none !important;
     border-color: #719ECE;
     font-size: 19px;
@@ -1300,11 +1343,6 @@ body.theme-sombre #whathappen textarea{
     text-decoration: none;
 }
 
-/* .option {
-     position: relative;
-    z-index: 0; */
-    /* display: flex; 
-} */
 
 .notify-count {
     position: absolute;
@@ -1318,10 +1356,6 @@ body.theme-sombre #whathappen textarea{
     font-weight: 500;
 }
 
-.count-following-i:hover, .count-followers-i:hover {
-    cursor: pointer;
-    text-decoration: underline;
-}
 
 @media only screen and (max-width: 800px) {
     html {
@@ -1513,7 +1547,7 @@ body.theme-sombre #whathappen textarea{
     .retweet-popup-body-wrap{
         width: 400px;
         height: auto;
-        margin: 0px auto;
+        margin: 0 auto;
         top: 13%;
         position: relative;
         background:#fff;

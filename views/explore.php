@@ -71,9 +71,21 @@
                         </div>
                     </div>
                 </a>
+
+                <div class="theme">
+                        <li class="nav-item align-items-center d-flex">
+                            <i class="bi bi-sun-fill"></i>
+                            <div class="ms-2 form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="themingSwitcher" />
+                            </div>
+                            <i class="bi bi-moon-fill"></i>
+                        </li>
+                    </div>
+
                 <button class="button-twittear">
                     <strong>Tweeter</strong>
                 </button>
+
 
                 <div class="box-user">
                     <div class="grid-user">

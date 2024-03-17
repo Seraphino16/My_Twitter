@@ -71,6 +71,17 @@
                             </div>
                         </div>
                     </a>
+
+                    <div class="theme">
+                        <li class="nav-item align-items-center d-flex">
+                            <i class="bi bi-sun-fill"></i>
+                            <div class="ms-2 form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="themingSwitcher" />
+                            </div>
+                            <i class="bi bi-moon-fill"></i>
+                        </li>
+                    </div>
+
                     <button class="button-twittear">
                         <strong>Tweeter</strong>
                     </button>
@@ -113,15 +124,7 @@
                                     <span class="home-name fullname">Name</span>
                                     <p class="home-tweets-num">NB Tweets</p>
                                 </div>
-                                <div class="theme">
-                                    <li class="nav-item align-items-center d-flex">
-                                        <i class="bi bi-sun-fill"></i>                                                <!-- Default switch -->
-                                        <div class="ms-2 form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch" id="themingSwitcher" />
-                                        </div>
-                                        <i class="bi bi-moon-fill"></i>
-                                    </li>
-                                </div>
+                    
                             </div>
                             <div class="row mt-5">
                                 <div class="col-md-12">

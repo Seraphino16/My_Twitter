@@ -7,14 +7,14 @@ include '../controller/UserController.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | Tweet Academie</title>
-    <link rel="shortcut icon" type="image/png" href="../public/img/logo_onglet.png">
+    <link rel="shortcut icon" type="image/png" href="../publics/img/logo_onglet.png">
     <link rel="stylesheet" href="../publics/css/style.css">
     <link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-    <body class="theme-clair">
+<body class="theme-clair">
         <div id="all">
             <div class="wrapper-left">
                 <div class="sidebar-left">
@@ -24,7 +24,7 @@ include '../controller/UserController.php';
                         </div>
                     </div>
 
-                    <a href="home.php">
+                    <a href="homeView.php">
                         <div class="grid-sidebar bg-active">
                             <div class="icon-sidebar-align">
                                 <i class="bi bi-house-fill"></i>
@@ -44,7 +44,7 @@ include '../controller/UserController.php';
                             </div>
                         </div>
                     </a>
-                    <a href="">
+                    <a href="profileView.php">
                         <div class="grid-sidebar">
                             <div class="icon-sidebar-align">
                                 <i class="bi bi-person-fill"></i>
@@ -74,6 +74,17 @@ include '../controller/UserController.php';
                             </div>
                         </div>
                     </a>
+
+                    <div class="theme">
+                        <li class="nav-item align-items-center d-flex">
+                            <i class="bi bi-sun-fill"></i>
+                            <div class="ms-2 form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="themingSwitcher" />
+                            </div>
+                            <i class="bi bi-moon-fill"></i>
+                        </li>
+                    </div>
+
                     <button class="button-twittear">
                         <strong>Tweeter</strong>
                     </button>
@@ -102,13 +113,6 @@ include '../controller/UserController.php';
                                             <div class="home">
                                                 <h2>Accueil</h2>
                                             </div>
-                                            <li class="nav-item align-items-center d-flex">
-                                                <i class="bi bi-sun-fill"></i>                                                <!-- Default switch -->
-                                                <div class="ms-2 form-check form-switch">
-                                                    <input class="form-check-input" type="checkbox" role="switch" id="themingSwitcher" />
-                                                </div>
-                                                <i class="bi bi-moon-fill"></i>
-                                            </li>
                                         </div>
 
                                         <div class="text">
@@ -120,18 +124,19 @@ include '../controller/UserController.php';
                                                     </label>
                                                 </div>
 
+                                                <div id="user-suggestions" class="suggestions">
+                                                    <ul></ul>
+                                                </div>
+
                                                 <div class="bottom">
                                                     <div class="bottom-container">
                                                         <label for="tweet_img" class="ml-3 mb-2 uni">
                                                             <i class="bi bi-image-fill"></i>
                                                         </label>
                                                         <input class="tweet_img" id="tweet_img" type="file" name="tweet_img">
-
                                                     </div>
                                                     <div class="hash-box">
-
                                                         <ul style="margin-bottom: 0;"></ul>
-
                                                     </div>
                                                     <div class="hash-box-items">
                                                         <span class="bioCount" id="count">140</span>
@@ -174,6 +179,7 @@ include '../controller/UserController.php';
                 </div>
             </div>
         </div>
+
 
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
