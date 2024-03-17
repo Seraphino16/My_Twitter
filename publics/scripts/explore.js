@@ -76,6 +76,9 @@ function searchUsers(searchTerm) {
             $('#resultsContent').empty();
 
             response.forEach(user => {
+
+                let bio = (user.bio !== null && user.bio !== undefined) ? user.bio : "";
+
                 const userResult =  ` <div class="tweet">
                 <div class="row">
                     <div class="col-9">
@@ -89,7 +92,7 @@ function searchUsers(searchTerm) {
                             </div>
                         </div>
                         <div class="home-title">
-                            <p class="bio"></p>
+                            <p class="bio">${bio}</p>
                         </div>
                     </div>
                     <div class="col-3 d-flex justify-content-end align-items-center">
@@ -97,13 +100,8 @@ function searchUsers(searchTerm) {
                     </div>
                 </div>
             </div>`
+
                 $('#resultsContent').append(userResult);
-
-
-            if(user.bio !== null && user.bio.length !== 0) {
-                $(".bio").text(user.bio);
-                
-            }
 
         });
             
