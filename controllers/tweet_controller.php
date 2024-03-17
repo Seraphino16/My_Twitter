@@ -4,7 +4,6 @@ require_once('../config/database.php');
 require_once('../models/tweet_model.php');
 
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer l'ID de l'utilisateur connecté depuis la session
     $userId = $_POST['id'];
@@ -19,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Créer le tweet et obtenir son ID
         $tweetId = tweetModel::createTweet($userId, $message);
+        
 
         // Si la création du tweet a réussi
         if ($tweetId !== false) {
@@ -26,6 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             foreach ($hashtags as $tag) {
                 tweetModel::createHashtag($tweetId, $tag);
             }
+
+            // Enregistrer le retweet dans la base de données
+            tweetModel::retweetTweet($userId, $tweetId);
 
             // Obtenir la date de création du tweet
             $date = tweetModel::getCreatedAtByID($tweetId);

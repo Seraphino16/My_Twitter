@@ -134,4 +134,36 @@ class tweetModel {
             return false;
         }
     }
+
+    //insertion d'un retweet
+    public static function retweetTweet($userId, $tweetId) {
+        try {
+            global $db;
+
+            // Vérifier si l'utilisateur a déjà retweeté ce tweet
+            $query = "SELECT * FROM retweets WHERE user_id = :user_id AND references_tweet_id = :tweet_id AND isDeleted = 0";
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+            $stmt->bindParam(':tweet_id', $tweetId, PDO::PARAM_INT);
+            $stmt->execute();
+            $existingRetweet = $stmt->fetch();
+
+            if ($existingRetweet) {
+                return false; // L'utilisateur a déjà retweeté ce tweet
+            }
+
+            // Insérer un nouveau retweet dans la base de données
+            $query = "INSERT INTO retweets (tweet_id, user_id, references_tweet_id) VALUES (:tweet_id, :user_id, :references_tweet_id)";
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(':tweet_id', $tweetId, PDO::PARAM_INT);
+            $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+            $stmt->bindParam(':references_tweet_id', $tweetId, PDO::PARAM_INT); // L'ID du tweet retweeté est le même que l'ID du tweet original
+            $stmt->execute();
+
+            return true; // Le retweet a été enregistré avec succès
+        } catch (PDOException $e) {
+            // Gérer les erreurs de base de données
+            return false;
+        }
+    }
 }
