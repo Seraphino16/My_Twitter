@@ -25,6 +25,9 @@ if (userDataJSON) {
     }
     
     if (firstname && username) {
+
+        $('.name').html('<strong>' + firstname + '</strong>');
+        $('.username').text('@' + username);
     
         getUserInfos(id, selectedUsername);
         getUserFollowers(id, selectedUsername);
@@ -79,7 +82,7 @@ function getUserInfos(id, selectedUsername) {
                 $(".pseudo").text("@" + user.username);
                 $(".fullname").text(user.firstname);
 
-                console.log(response)
+                
                 if(user.bio !== null && user.bio.length !== 0) {
                     $(".bio").text(user.bio);
                 }
@@ -115,10 +118,8 @@ function getUserInfos(id, selectedUsername) {
         },
         error: function(xhr, status, error) {
                 console.log('Erreur AJAX : ');
-                console.log('status: ' + status);
-                console.log('error: ' + error);
-                console.log('responseText: ' + xhr.responseText);
-                alert('Erreur AJAX : ' + status);
+                
+               
         }
 
         

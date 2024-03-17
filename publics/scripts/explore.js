@@ -5,13 +5,13 @@ $(document).ready(function() {
 
     if (userDataJSON) {
         const user = JSON.parse(userDataJSON);
-        const fullname = user.firstname + ' ' + user.lastname;
+        const firstname = user.firstname ;
         const username = user.username;
         const id = user.id;
 
-    if (fullname && username) {
+    if (firstname && username) {
 
-        $('.name').html('<strong>' + fullname + '</strong>');
+        $('.name').html('<strong>' + firstname + '</strong>');
         $('.username').text('@' + username);
     }
 
