@@ -2,9 +2,6 @@ $(document).ready(function() {
     characterCount();
     const initialCount = parseInt($('#count').text());
 
-    // Charger les tweets depuis le stockage local lors du chargement de la page
-    loadTweetsFromLocalStorage();
-
     // Gestionnaire d'événements pour détecter les changements dans le texte du tweet et fournir des suggestions d'utilisateurs lors de la saisie après '@'
     $('.text-whathappen').on('input', function() {
         const text = $(this).val();
@@ -70,9 +67,6 @@ $(document).ready(function() {
                     // Générer l'HTML du tweet avec les hashtags et les noms d'utilisateur
                     const tweetHTML = generateTweetHTML(response.fullname, response.username, response.message, response.date);
                     $('.tweet-container').prepend(tweetHTML);
-
-                    // Stocker les informations du tweet dans le stockage local
-                    storeTweetLocally(response);
 
                     $('form')[0].reset();
                     $('#count').text(initialCount);
@@ -276,22 +270,6 @@ function calculateTimePassed(date){
     }
 
     return displayTime;
-}
-
-// Fonction pour stocker les informations du tweet dans le stockage local
-function storeTweetLocally(tweetData) {
-    let storedTweets = JSON.parse(localStorage.getItem('tweets')) || [];
-    storedTweets.unshift(tweetData);
-    localStorage.setItem('tweets', JSON.stringify(storedTweets));
-}
-
-// Fonction pour charger les tweets depuis le stockage local
-function loadTweetsFromLocalStorage() {
-    const storedTweets = JSON.parse(localStorage.getItem('tweets')) || [];
-    storedTweets.forEach(tweetData => {
-        const tweetHTML = generateTweetHTML(tweetData.fullname, tweetData.username, tweetData.message, tweetData.date);
-        $('.tweet-container').append(tweetHTML);
-    });
 }
 
 // Fonction pour récupérer les suggestions d'utilisateurs du serveur
